@@ -1,0 +1,18 @@
+<h1>Show Student</h1>
+
+<ul>
+
+  <li>
+    <strong>First name:</strong>
+    <%= @student.first_name %>
+  </li>
+
+  <li>
+    <strong>Last name:</strong>
+    <%= @student.last_name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.student_path(@conn, :edit, @student) %></span> |
+<span><%= link "Back", to: Routes.student_path(@conn, :index) %></span>
