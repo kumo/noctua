@@ -10,7 +10,8 @@ defmodule NoctuaWeb.LessonController do
   end
 
   def new(conn, _params) do
-    changeset = Timetabling.change_lesson(%Lesson{})
+    lesson = %Lesson{started_at: DateTime.utc_now }
+    changeset = Timetabling.change_lesson(lesson)
     render(conn, "new.html", changeset: changeset)
   end
 
