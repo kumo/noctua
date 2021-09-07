@@ -1,0 +1,28 @@
+<h1>Listing Teachers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for teacher <- @teachers do %>
+    <tr>
+      <td><%= teacher.first_name %></td>
+      <td><%= teacher.last_name %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.teacher_path(@conn, :show, teacher) %></span>
+        <span><%= link "Edit", to: Routes.teacher_path(@conn, :edit, teacher) %></span>
+        <span><%= link "Delete", to: Routes.teacher_path(@conn, :delete, teacher), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Teacher", to: Routes.teacher_path(@conn, :new) %></span>

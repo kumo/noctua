@@ -1,0 +1,18 @@
+<h1>Show Teacher</h1>
+
+<ul>
+
+  <li>
+    <strong>First name:</strong>
+    <%= @teacher.first_name %>
+  </li>
+
+  <li>
+    <strong>Last name:</strong>
+    <%= @teacher.last_name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.teacher_path(@conn, :edit, @teacher) %></span> |
+<span><%= link "Back", to: Routes.teacher_path(@conn, :index) %></span>
