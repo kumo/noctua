@@ -35,7 +35,12 @@ defmodule Noctua.Timetabling do
       ** (Ecto.NoResultsError)
 
   """
-  def get_lesson!(id), do: Repo.get!(Lesson, id)
+  def get_lesson!(id) do
+    Lesson
+    |> Repo.get(id)
+    |> Repo.preload(:student)
+    |> Repo.preload(:teacher)
+  end
 
   @doc """
   Creates a lesson.
@@ -50,7 +55,7 @@ defmodule Noctua.Timetabling do
 
   """
   def create_lesson(attrs \\ %{}) do
-    %Lesson{}
+    %Lesson{teacher_id: 1}
     |> Lesson.changeset(attrs)
     |> Repo.insert()
   end

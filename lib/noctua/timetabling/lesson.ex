@@ -15,7 +15,7 @@ defmodule Noctua.Timetabling.Lesson do
   @doc false
   def changeset(lesson, attrs) do
     lesson
-    |> cast(attrs, [:started_at, :ended_at, :note])
-    |> validate_required([:started_at, :ended_at, :note])
+    |> cast(attrs, [:started_at, :ended_at, :note, :student_id, :teacher_id])
+    |> validate_required([:started_at, :ended_at, :student_id, :teacher_id])
   end
 end

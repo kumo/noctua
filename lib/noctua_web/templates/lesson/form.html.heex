@@ -13,6 +13,14 @@
   <%= datetime_select f, :ended_at %>
   <%= error_tag f, :ended_at %>
 
+  <%= label f, :student_id %>
+  <%= student_select f, @changeset %>
+  <%= error_tag f, :student_id %>
+
+  <%= label f, :teacher_id %>
+  <%= teacher_select f, @changeset %>
+  <%= error_tag f, :teacher_id %>
+
   <%= label f, :note %>
   <%= text_input f, :note %>
   <%= error_tag f, :note %>

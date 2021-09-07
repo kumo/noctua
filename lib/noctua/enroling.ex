@@ -7,6 +7,7 @@ defmodule Noctua.Enroling do
   alias Noctua.Repo
 
   alias Noctua.Enroling.Student
+  alias Noctua.Timetabling.Lesson
 
   @doc """
   Returns the list of students.
@@ -35,7 +36,11 @@ defmodule Noctua.Enroling do
       ** (Ecto.NoResultsError)
 
   """
-  def get_student!(id), do: Repo.get!(Student, id)
+  def get_student!(id) do
+    Student
+    |> Repo.get(id)
+    |> Repo.preload(:lessons)
+  end
 
   @doc """
   Creates a student.

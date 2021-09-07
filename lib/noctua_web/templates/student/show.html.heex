@@ -12,6 +12,19 @@
     <%= @student.last_name %>
   </li>
 
+  <%= if @student.lessons == [] do %>
+  This student hasn't attended any lessons.
+  <% else %>
+    <ul>
+      <%= for lesson <- @student.lessons do %>
+        <li>
+          <%= lesson.note %>
+        </li>
+      <% end %>
+    </ul>
+    <% end %>
+
+
 </ul>
 
 <span><%= link "Edit", to: Routes.student_path(@conn, :edit, @student) %></span> |

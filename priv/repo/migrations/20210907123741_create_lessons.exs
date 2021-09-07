@@ -14,6 +14,5 @@ defmodule Noctua.Repo.Migrations.CreateLessons do
 
     create index(:lessons, [:teacher_id])
     create index(:lessons, [:student_id])
-    create unique_index(:lessons, [:teacher_id, :student_id])
   end
 end

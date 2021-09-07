@@ -6,6 +6,8 @@ defmodule Noctua.Enroling.Student do
     field :first_name, :string
     field :last_name, :string
 
+    has_many :lessons, Noctua.Timetabling.Lesson
+
     timestamps()
   end
 
