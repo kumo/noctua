@@ -20,6 +20,7 @@ defmodule NoctuaWeb.Router do
     get "/", PageController, :index
     resources "/teachers", TeacherController
     resources "/students", StudentController    
+    resources "/lessons", LessonController
   end
 
   # Other scopes may use custom stacks.

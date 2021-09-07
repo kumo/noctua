@@ -1,0 +1,23 @@
+<h1>Show Lesson</h1>
+
+<ul>
+
+  <li>
+    <strong>Started at:</strong>
+    <%= @lesson.started_at %>
+  </li>
+
+  <li>
+    <strong>Ended at:</strong>
+    <%= @lesson.ended_at %>
+  </li>
+
+  <li>
+    <strong>Note:</strong>
+    <%= @lesson.note %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.lesson_path(@conn, :edit, @lesson) %></span> |
+<span><%= link "Back", to: Routes.lesson_path(@conn, :index) %></span>
