@@ -1,18 +1,55 @@
-<h1>Show Teacher</h1>
-
-<ul>
-
-  <li>
-    <strong>First name:</strong>
-    <%= @teacher.first_name %>
-  </li>
-
-  <li>
-    <strong>Last name:</strong>
-    <%= @teacher.last_name %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.teacher_path(@conn, :edit, @teacher) %></span> |
-<span><%= link "Back", to: Routes.teacher_path(@conn, :index) %></span>
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="bg-white shadow overflow-hidden sm:rounded-lg">
+  <div class="px-4 py-5 sm:px-6">
+    <h3 class="text-lg leading-6 font-medium text-gray-900">
+      Docente
+    </h3>
+    <p class="mt-1 max-w-2xl text-sm text-gray-500">
+      Informazione varie.
+    </p>
+  </div>
+  <div class="border-t border-gray-200">
+    <dl>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          Nome
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <%= @teacher.first_name %> <%= @teacher.last_name %>
+        </dd>
+      </div>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          Materie
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          Matematica, Inglese, Storia
+        </dd>
+      </div>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          Email
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          docente@blah.it
+        </dd>
+      </div>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          Cellulare
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          328 ....
+        </dd>
+      </div>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          Telefono di casa
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          0332 ....
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
