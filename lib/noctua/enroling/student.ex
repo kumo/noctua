@@ -1,6 +1,7 @@
 defmodule Noctua.Enroling.Student do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query
 
   schema "students" do
     field :first_name, :string
@@ -16,5 +17,9 @@ defmodule Noctua.Enroling.Student do
     student
     |> cast(attrs, [:first_name, :last_name])
     |> validate_required([:first_name, :last_name])
+  end
+
+  def alphabetical(query) do
+    from c in query, order_by: c.last_name
   end
 end

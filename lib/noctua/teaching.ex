@@ -21,6 +21,12 @@ defmodule Noctua.Teaching do
     Repo.all(Teacher)
   end
 
+  def list_alphabetical_teachers do
+    Teacher
+    |> Teacher.alphabetical()
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single teacher.
 

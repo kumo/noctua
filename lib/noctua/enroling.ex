@@ -22,6 +22,12 @@ defmodule Noctua.Enroling do
     Repo.all(Student)
   end
 
+  def list_alphabetical_students do
+    Student
+    |> Student.alphabetical()
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single student.
 

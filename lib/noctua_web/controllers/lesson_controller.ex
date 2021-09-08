@@ -5,7 +5,7 @@ defmodule NoctuaWeb.LessonController do
   alias Noctua.Timetabling.Lesson
 
   def index(conn, _params) do
-    lessons = Timetabling.list_lessons()
+    lessons = Timetabling.list_ordered_lessons()
     render(conn, "index.html", lessons: lessons)
   end
 
