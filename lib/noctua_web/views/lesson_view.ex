@@ -41,4 +41,18 @@ defmodule NoctuaWeb.LessonView do
     select(f, :date, ["Oggi (#{today_str})": today_str, "Ieri (#{yesterday_str})": yesterday_str, "#{two_days_ago_str}": two_days_ago_str, "#{three_days_ago_str}": three_days_ago_str], class: "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm")
   end
 
+  def title("show.html", assigns) do
+    assigns.lesson.student.first_name <> " " <> assigns.lesson.student.last_name
+  end
+
+  def title("index.html", _assigns) do
+    "Elenco Registri"
+  end
+
+  def title("edit.html", _assigns) do
+    "Modifica Registro"
+  end
+
+  def title(_action, _assigns), do: "Studente"
+
 end
