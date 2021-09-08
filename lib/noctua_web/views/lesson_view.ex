@@ -1,7 +1,7 @@
 defmodule NoctuaWeb.LessonView do
   use NoctuaWeb, :view
 
-  def student_select(f, changeset) do
+  def student_select(f, _changeset) do
     student_opts =
       for student <- Noctua.Enroling.list_alphabetical_students(),
           do: [key: student.first_name <> " " <> student.last_name, value: student.id]
@@ -9,7 +9,7 @@ defmodule NoctuaWeb.LessonView do
     select(f, :student_id, student_opts, prompt: "", class: "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm")
   end
 
-  def teacher_select(f, changeset) do
+  def teacher_select(f, _changeset) do
     teacher_opts =
       for teacher <- Noctua.Teaching.list_alphabetical_teachers(),
           do: [key: teacher.first_name <> " " <> teacher.last_name, value: teacher.id]
@@ -34,9 +34,6 @@ defmodule NoctuaWeb.LessonView do
 
     three_days_ago = Timex.shift(two_days_ago, days: -1)
     three_days_ago_str = Timex.format!(three_days_ago, "{0D}/{0M}/{YYYY}")
-
-    four_days_ago = Timex.shift(three_days_ago, days: -1)
-    four_days_ago_str = Timex.format!(four_days_ago, "{0D}/{0M}/{YYYY}")
 
     select(f, :date, ["Oggi (#{today_str})": today_str, "Ieri (#{yesterday_str})": yesterday_str, "#{two_days_ago_str}": two_days_ago_str, "#{three_days_ago_str}": three_days_ago_str], class: "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm")
   end
