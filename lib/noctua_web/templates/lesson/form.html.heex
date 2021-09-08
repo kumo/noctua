@@ -1,31 +1,120 @@
 <.form let={f} for={@changeset}, action={@action}>
   <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+  <!-- This example requires Tailwind CSS v2.0+ -->
+<div class="rounded-md bg-red-50 p-4">
+  <div class="flex">
+    <div class="flex-shrink-0">
+      <!-- Heroicon name: solid/x-circle -->
+      <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+      </svg>
     </div>
+    <div class="ml-3">
+      <h3 class="text-sm font-medium text-red-800">
+        Oops, something went wrong! Please check the errors below.
+      </h3>
+    </div>
+  </div>
+</div>
+
   <% end %>
 
-  <%= label f, :started_at %>
-  <%= datetime_select f, :started_at %>
-  <%= error_tag f, :started_at %>
+  <% label f, :ended_at %>
+  <% datetime_select f, :ended_at %>
+  <% error_tag f, :ended_at %>
 
-  <%= label f, :ended_at %>
-  <%= datetime_select f, :ended_at %>
-  <%= error_tag f, :ended_at %>
 
-  <%= label f, :student_id %>
-  <%= student_select f, @changeset %>
-  <%= error_tag f, :student_id %>
+<!--
+  This example requires Tailwind CSS v2.0+ 
+  
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<div>
+  <div class="md:grid md:grid-cols-3 md:gap-6">
+    <div class="md:col-span-1">
+      <div class="px-4 sm:px-0">
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Nuovo lezione</h3>
+        <!-- <p class="mt-1 text-sm text-gray-600">
+          This information will be displayed publicly so be careful what you share.
+        </p> -->
+      </div>
+    </div>
+    <div class="mt-5 md:mt-0 md:col-span-2">
+      <form action="#" method="POST">
+        <div class="shadow sm:rounded-md sm:overflow-hidden">
+          <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
 
-  <%= label f, :teacher_id %>
-  <%= teacher_select f, @changeset %>
-  <%= error_tag f, :teacher_id %>
 
-  <%= label f, :note %>
-  <%= text_input f, :note %>
-  <%= error_tag f, :note %>
 
-  <div>
-    <%= submit "Save" %>
+            <div class="grid grid-cols-6 gap-6">
+
+              <div class="col-span-6 sm:col-span-3">
+                <label for="country" class="block text-sm font-medium text-gray-700">Quando</label>
+                <select id="country" name="country" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                  <option>Oggi (9/9/2021)</option>
+                  <option>Ieri (8/9/2021)</option>
+                  <option>L'altro ieri (7/9/2021)</option>
+                  <option>6/9/2021</option>
+                  <option>5/9/2021</option>
+                  <option>4/9/2021</option>
+                </select>
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <label for="country" class="block text-sm font-medium text-gray-700">Orario</label>
+                <select id="country" name="country" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                  <option>09:00</option>
+                  <option>10:00</option>
+                  <option>11:00</option>
+                  <option>12:00</option>
+                  <option>13:00</option>
+                  <option>14:00</option>
+                  <option>15:00</option>
+                  <option>16:00</option>
+                </select>
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <%= label f, :student_id, "Studente", class: "block text-sm font-medium text-gray-700" %>
+                <%= student_select f, @changeset %>
+                <%= error_tag f, :student_id %>
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <%= label f, :teacher_id, "Docente", class: "block text-sm font-medium text-gray-700" %>
+                <%= teacher_select f, @changeset %>
+              </div>
+            
+            </div>
+
+            <div>
+              <%= label f, :note, "Argomento", class: "block text-sm font-medium text-gray-700" %>
+              <div class="mt-1">
+                <%= textarea f, :note, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" %>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+            <%= submit "Salva", class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
+</div>
+
+
 </.form>
