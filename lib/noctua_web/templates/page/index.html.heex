@@ -125,14 +125,10 @@
 
         </ul>
 
-<div class="hidden sm:block" aria-hidden="true">
-  <div class="py-5">
-    <div class="border-t border-gray-200"></div>
-  </div>
-</div>
 
-      <!-- This example requires Tailwind CSS v2.0+ -->
-<div class="flex flex-col">
+<!-- This example requires Tailwind CSS v2.0+ -->
+
+<div class="flex flex-col mt-8">
   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
       <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -143,92 +139,44 @@
                 Orario
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Docente
-              </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Studente
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Argomento
+                Docente
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Argomento/Note
+              </th>
+              <th scope="col" class="relative px-6 py-3">
+                <span class="sr-only">Edit</span>
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
-            <tr>
+           <tbody class="bg-white divide-y divide-gray-200">
+
+<%= for lesson <- @lessons do %>
+
+            <tr class="bg-white">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                09:00
+                <%= Timex.format!(lesson.started_at, "{h24}:{0m}") %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                Docente A
+                <span class="truncate"><%= lesson.student.first_name %></span> 
+                <span class="text-gray-900 font-medium"><%= lesson.student.last_name %></span>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                Studente A
+                <span class="truncate"><%= lesson.teacher.first_name %></span> 
+                <span class="text-gray-900 font-medium"><%= lesson.teacher.last_name %></span>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                Matematica
+              <td class="px-6 py-4 text-sm text-gray-500">
+                <%= lesson.note %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <span><%= link "Modifica", to: Routes.lesson_path(@conn, :edit, lesson), class: "text-indigo-600 hover:text-indigo-900" %></span>
               </td>
             </tr>
 
-            <tr>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                09:00
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                Docente C
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                Studente E
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                Storia
-              </td>
-            </tr>
-
-
-            <tr>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                <time>11:00</time>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                Docente C
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                Studente A
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                Inglese
-              </td>
-            </tr>
-
-            <tr>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                ...
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                ...
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                ...
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                ...
-              </td>
-            </tr>
-
-                        <tr>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                ...
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                ...
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                ...
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                ...
-              </td>
-            </tr>
+<% end %>            
 
             <!-- More people... -->
           </tbody>

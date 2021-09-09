@@ -34,6 +34,15 @@ defmodule Noctua.Timetabling do
     # Repo.all(Lesson), preload: [:student, :teacher])
   end
 
+  def list_today_lessons do
+    Lesson
+    |> Lesson.ordered()
+    |> Lesson.today()
+    |> Repo.all()
+    |> Repo.preload(:student)
+    |> Repo.preload(:teacher)
+  end
+
   @doc """
   Gets a single lesson.
 

@@ -27,6 +27,12 @@ defmodule Noctua.Timetabling.Lesson do
     from c in query, order_by: c.started_at
   end
 
+  def today(query) do
+    today = Timex.now() |> Timex.beginning_of_day()
+
+    from c in query, where: c.started_at >= ^today
+  end
+
   defp timey_wimey(changeset) do
     case changeset do
       %Ecto.Changeset{
