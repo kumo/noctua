@@ -5,7 +5,7 @@ defmodule NoctuaWeb.TeacherController do
   alias Noctua.Teaching.Teacher
 
   def index(conn, _params) do
-    teachers = Teaching.list_alphabetical_teachers()
+    teachers = Teaching.list_teachers_with_recent_lessons_count()
     render(conn, "index.html", teachers: teachers)
   end
 

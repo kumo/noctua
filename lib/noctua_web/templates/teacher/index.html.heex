@@ -31,6 +31,9 @@
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Questa mese
               </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Mese scorsa
+              </th>
               <th scope="col" class="relative px-6 py-3">
                 <span class="sr-only">Edit</span>
               </th>
@@ -46,13 +49,16 @@
                 <span class="text-gray-900 font-medium"><%= teacher.last_name %></span>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <%= Enum.random(0..4) %>
+                <%= teacher.today_count %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <%= Enum.random(5..12) %>
+                <%= teacher.this_week_count %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <%= Enum.random(14..40) %>
+                <%= teacher.this_month_count %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <%= teacher.last_month_count %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <span><%= link "Show", to: Routes.teacher_path(@conn, :show, teacher), class: "text-indigo-600 hover:text-indigo-900" %></span>
