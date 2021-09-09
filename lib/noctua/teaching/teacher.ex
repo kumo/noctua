@@ -37,6 +37,12 @@ defmodule Noctua.Teaching.Teacher do
       select_merge: %{today_count: ltd.count, this_week_count: ltw.count, this_month_count: ltm.count, last_month_count: llm.count}
   end
 
+  def with_today_lessons_count(query) do
+    from q in query,
+      join: ltd in subquery(lesson_count_today()), on: ltd.teacher_id == q.id,
+      select_merge: %{today_count: ltd.count}
+  end
+
   defp lesson_count_today do
     # today = Timex.now() |> Timex.beginning_of_day()
 

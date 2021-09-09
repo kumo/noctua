@@ -34,6 +34,13 @@ defmodule Noctua.Teaching do
     |> Repo.all()
   end
 
+  def list_teachers_with_today_lessons_count do
+    Teacher
+    |> Teacher.with_today_lessons_count()
+    |> Teacher.alphabetical()
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single teacher.
 
