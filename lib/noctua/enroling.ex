@@ -28,6 +28,13 @@ defmodule Noctua.Enroling do
     |> Repo.all()
   end
 
+  def list_students_with_recent_lessons_count do
+    Student
+    |> Student.with_recent_lessons_count()
+    |> Student.alphabetical()
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single student.
 

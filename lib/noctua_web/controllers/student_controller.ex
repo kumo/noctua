@@ -5,7 +5,7 @@ defmodule NoctuaWeb.StudentController do
   alias Noctua.Enroling.Student
 
   def index(conn, _params) do
-    students = Enroling.list_alphabetical_students()
+    students = Enroling.list_students_with_recent_lessons_count()
     render(conn, "index.html", students: students)
   end
 

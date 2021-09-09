@@ -33,6 +33,25 @@ defmodule Noctua.Timetabling.Lesson do
     from c in query, where: c.started_at >= ^today
   end
 
+  def this_week(query) do
+    this_week = Timex.now() |> Timex.beginning_of_week()
+
+    from c in query, where: c.started_at >= ^this_week
+  end
+
+  def this_month(query) do
+    this_month = Timex.now() |> Timex.beginning_of_month()
+
+    from c in query, where: c.started_at >= ^this_month
+  end
+
+  def last_month(query) do
+    this_month = Timex.now() |> Timex.beginning_of_month()
+    last_month = Timex.now() |> Timex.shift(months: -1) |> Timex.beginning_of_month()
+
+    from c in query, where: c.started_at >= ^last_month and c.started_at < ^this_month
+  end
+
   defp timey_wimey(changeset) do
     case changeset do
       %Ecto.Changeset{
