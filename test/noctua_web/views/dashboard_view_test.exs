@@ -1,3 +1,3 @@
-defmodule NoctuaWeb.PageViewTest do
+defmodule NoctuaWeb.DashboardViewTest do
   use NoctuaWeb.ConnCase, async: true
 end

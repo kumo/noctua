@@ -1,4 +1,4 @@
-defmodule NoctuaWeb.PageView do
+defmodule NoctuaWeb.DashboardView do
   use NoctuaWeb, :view
 
   def title("index.html", _assigns) do

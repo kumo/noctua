@@ -1,4 +1,4 @@
-defmodule NoctuaWeb.PageControllerTest do
+defmodule NoctuaWeb.DashboardControllerTest do
   use NoctuaWeb.ConnCase
 
   test "GET /", %{conn: conn} do

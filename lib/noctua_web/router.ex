@@ -17,9 +17,9 @@ defmodule NoctuaWeb.Router do
   scope "/", NoctuaWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", DashboardController, :index
     resources "/teachers", TeacherController
-    resources "/students", StudentController    
+    resources "/students", StudentController
     resources "/lessons", LessonController
   end
 

@@ -1,4 +1,4 @@
-defmodule NoctuaWeb.PageController do
+defmodule NoctuaWeb.DashboardController do
   use NoctuaWeb, :controller
   alias Noctua.Timetabling
   alias Noctua.Enroling
