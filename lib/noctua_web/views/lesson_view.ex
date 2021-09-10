@@ -24,6 +24,26 @@ defmodule NoctuaWeb.LessonView do
     select(f, :time, times, class: "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm")
   end
 
+  def simple_late_select(f, _changeset) do
+    times = 
+      for time <- Enum.take_every(0..20, 5),
+          do: [key: "#{time} minuti", value: time]
+
+    select(f, :late_minutes, times, class: "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm")
+  end
+
+  def simple_left_early_select(f, _changeset) do
+    times = 
+      for time <- Enum.take_every(0..20, 5),
+          do: [key: "#{time} minuti", value: time]
+
+    select(f, :left_early_minutes, times, class: "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm")
+  end
+
+  def simple_bool_select(f, _changeset) do
+    select(f, :time, ["No": 0, "Sì": 1], class: "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm")
+  end
+
   def simple_date_select(f, _changeset) do
     today = Timex.now() |> Timex.beginning_of_day()
     today_str = Timex.format!(today, "{0D}/{0M}/{YYYY}")

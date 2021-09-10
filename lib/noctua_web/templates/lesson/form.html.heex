@@ -75,6 +75,21 @@
 
               </div>
 
+              <div class="col-span-6 sm:col-span-2">
+                <%= label f, :late_minutes, "Entrata ritardata", class: "block text-sm font-medium text-gray-700" %>
+                <%= simple_late_select(f, @changeset) %>
+              </div>
+
+              <div class="col-span-6 sm:col-span-2">
+                <%= label f, :left_early_minutes, "Uscita anticipata", class: "block text-sm font-medium text-gray-700" %>
+                <%= simple_left_early_select(f, @changeset) %>
+              </div>
+
+              <div class="col-span-6 sm:col-span-2">
+                <%= label f, :absent, "Assente", class: "block text-sm font-medium text-gray-700" %>
+                <%= checkbox f, :absent, class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" %>
+              </div>
+
               <div class="col-span-6 sm:col-span-3">
                 <%= label f, :student_id, "Studente", class: "block text-sm font-medium text-gray-700" %>
                 <%= student_select f, @changeset %>

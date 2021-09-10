@@ -7,6 +7,9 @@ defmodule Noctua.Timetabling.Lesson do
     field :ended_at, :naive_datetime # I wonder if when is more suitable? I could just do time for start and end
     field :note, :string
     field :started_at, :naive_datetime
+    field :late_minutes, :integer
+    field :left_early_minutes, :integer
+    field :absent, :boolean
     field :date, :string, virtual: true
     field :time, :string, virtual: true
     belongs_to :teacher, Noctua.Teaching.Teacher
@@ -18,7 +21,7 @@ defmodule Noctua.Timetabling.Lesson do
   @doc false
   def changeset(lesson, attrs) do
     lesson
-    |> cast(attrs, [:started_at, :ended_at, :note, :student_id, :teacher_id, :date, :time])
+    |> cast(attrs, [:started_at, :ended_at, :note, :student_id, :teacher_id, :date, :time, :late_minutes, :left_early_minutes, :absent])
     |> timey_wimey()
     |> validate_required([:started_at, :ended_at, :student_id, :teacher_id])
   end
