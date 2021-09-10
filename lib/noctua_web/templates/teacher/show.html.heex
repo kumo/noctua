@@ -118,7 +118,7 @@
 
             <tr class="bg-white">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                <%= Timex.format!(lesson.started_at, "{D}-{M}-{YYYY}") %>
+                <%= Timex.format!(lesson.started_at, "{D}/{M}/{YYYY}") %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 <%= Timex.format!(lesson.started_at, "{h24}:{0m}") %>
