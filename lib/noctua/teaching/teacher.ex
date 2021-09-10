@@ -32,10 +32,11 @@ defmodule Noctua.Teaching.Teacher do
   end
 
   def with_recent_lessons_count(query) do
-    today_query = Lesson |> Lesson.count_for_teachers() |> Lesson.today()
-    this_week_query = Lesson |> Lesson.count_for_teachers() |> Lesson.this_week()
-    this_month_query = Lesson |> Lesson.count_for_teachers() |> Lesson.this_month()
-    last_month_query = Lesson |> Lesson.count_for_teachers() |> Lesson.last_month()
+    shared = Lesson |> Lesson.count_for_teachers()
+    today_query = shared |> Lesson.today()
+    this_week_query = shared |> Lesson.this_week()
+    this_month_query = shared |> Lesson.this_month()
+    last_month_query = shared |> Lesson.last_month()
 
     from q in query,
       left_join: ltd in subquery(today_query), on: ltd.teacher_id == q.id,
@@ -62,8 +63,10 @@ defmodule Noctua.Teaching.Teacher do
   end
 
   def with_this_month_lessons_absences_count(query, %Noctua.Enroling.Student{} = student) do
-    this_month_lessons_query = Lesson |> Lesson.count_for_teachers() |> Lesson.present() |> where([l], l.student_id == ^student.id) |> Lesson.this_month()
-    this_month_absences_query = Lesson |> Lesson.count_for_teachers() |> Lesson.absent() |> where([l], l.student_id == ^student.id) |> Lesson.this_month()
+    shared = Lesson |> Lesson.count_for_teachers() |> where([l], l.student_id == ^student.id) |> Lesson.this_month()
+
+    this_month_lessons_query = shared |> Lesson.present()
+    this_month_absences_query = shared |> Lesson.absent()
 
     from q in query,
       left_join: ltm in subquery(this_month_lessons_query), on: ltm.teacher_id == q.id,

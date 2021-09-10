@@ -32,10 +32,13 @@ defmodule Noctua.Enroling.Student do
   end
 
   def with_recent_lessons_count(query) do
-    today_query = Lesson |> Lesson.count_for_students() |> Lesson.present() |> Lesson.today()
-    this_week_query = Lesson |> Lesson.count_for_students() |> Lesson.present() |> Lesson.this_week()
-    this_month_query = Lesson |> Lesson.count_for_students() |> Lesson.present() |> Lesson.this_month()
-    last_month_query = Lesson |> Lesson.count_for_students() |> Lesson.present() |> Lesson.last_month()
+    shared = Lesson |> Lesson.count_for_students() |> Lesson.present()
+
+    today_query      = shared |> Lesson.today()
+    this_week_query  = shared |> Lesson.this_week()
+    this_month_query = shared |> Lesson.this_month()
+    last_month_query = shared |> Lesson.last_month()
+
     this_month_absences_query = Lesson |> Lesson.count_for_students() |> Lesson.absent() |> Lesson.this_month()
 
     from q in query,
@@ -56,8 +59,10 @@ defmodule Noctua.Enroling.Student do
   end
 
   def with_today_lessons_absences_count(query) do
-    today_query = Lesson |> Lesson.count_for_students() |> Lesson.present() |> Lesson.today()
-    today_absences_query = Lesson |> Lesson.count_for_students() |> Lesson.absent() |> Lesson.today()
+    shared = Lesson |> Lesson.count_for_students() |> Lesson.today()
+    
+    today_query = shared |> Lesson.present()
+    today_absences_query = shared |> Lesson.absent()
 
     from q in query,
       left_join: ltd in subquery(today_query), on: ltd.student_id == q.id,
@@ -74,8 +79,10 @@ defmodule Noctua.Enroling.Student do
   end
 
   def with_this_month_lessons_absences_count(query, %Noctua.Teaching.Teacher{} = teacher) do
-    this_month_lessons_query = Lesson |> Lesson.count_for_students() |> Lesson.present() |> where([l], l.teacher_id == ^teacher.id) |> Lesson.this_month()
-    this_month_absences_query = Lesson |> Lesson.count_for_students() |> Lesson.absent() |> where([l], l.teacher_id == ^teacher.id) |> Lesson.this_month()
+    shared = Lesson |> Lesson.count_for_students() |> where([l], l.teacher_id == ^teacher.id) |> Lesson.this_month()
+
+    this_month_lessons_query = shared |> Lesson.present()
+    this_month_absences_query = shared |> Lesson.absent()
 
     from q in query,
       left_join: ltm in subquery(this_month_lessons_query), on: ltm.student_id == q.id,
