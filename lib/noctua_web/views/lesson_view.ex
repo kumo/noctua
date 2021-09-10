@@ -20,7 +20,7 @@ defmodule NoctuaWeb.LessonView do
   def simple_time_select(f, _changeset) do
     # Probably should be able to select no time, but that messes up the changeset code
     times = 
-      Enum.to_list(8..21) |> Enum.map(fn(x) -> "#{x}:00" end)
+      Enum.to_list(8..21) |> Enum.map(fn(x) -> "#{x}:00" |> String.pad_leading(5, "0") end)
     select(f, :time, times, class: "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm")
   end
 
