@@ -29,3 +29,73 @@
 
 <span><%= link "Edit", to: Routes.student_path(@conn, :edit, @student) %></span> |
 <span><%= link "Back", to: Routes.student_path(@conn, :index) %></span>
+
+<!-- This example requires Tailwind CSS v2.0+ -->
+
+<div class="flex flex-col mt-8">
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Quando
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Orario
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Docente
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Stato
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Argomento/Note
+              </th>
+              <th scope="col" class="relative px-6 py-3">
+                <span class="sr-only">Modifica</span>
+              </th>
+            </tr>
+          </thead>
+           <tbody class="bg-white divide-y divide-gray-200">
+
+<%= for lesson <- @lessons do %>
+
+            <tr class="bg-white">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                <%= Timex.format!(lesson.started_at, "{D}-{M}-{YYYY}") %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <%= Timex.format!(lesson.started_at, "{h24}:{0m}") %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <span class="truncate"><%= lesson.teacher.first_name %></span> 
+                <span class="text-gray-900 font-medium"><%= lesson.teacher.last_name %></span>
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-500">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                  Assente
+                </span>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                  In ritardo
+                </span>
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-500">
+                <%= lesson.note %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <span><%= link "Modifica", to: Routes.lesson_path(@conn, :edit, lesson), class: "text-indigo-600 hover:text-indigo-900" %></span>
+              </td>
+            </tr>
+
+<% end %>            
+
+            <!-- More people... -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

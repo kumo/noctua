@@ -28,7 +28,8 @@ defmodule NoctuaWeb.StudentController do
 
   def show(conn, %{"id" => id}) do
     student = Enroling.get_student!(id)
-    render(conn, "show.html", student: student)
+    lessons = Noctua.Timetabling.list_month_lessons(student)
+    render(conn, "show.html", student: student, lessons: lessons)
   end
 
   def edit(conn, %{"id" => id}) do

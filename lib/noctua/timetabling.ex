@@ -43,6 +43,24 @@ defmodule Noctua.Timetabling do
     |> Repo.preload(:teacher)
   end
 
+  def list_month_lessons(%Noctua.Teaching.Teacher{} = teacher) do
+    Lesson
+    |> Lesson.ordered()
+    |> Lesson.this_month()
+    |> where([l], l.teacher_id == ^teacher.id)
+    |> Repo.all()
+    |> Repo.preload(:student)
+  end
+
+  def list_month_lessons(%Noctua.Enroling.Student{} = student) do
+    Lesson
+    |> Lesson.ordered()
+    |> Lesson.this_month()
+    |> where([l], l.student_id == ^student.id)
+    |> Repo.all()
+    |> Repo.preload(:teacher)
+  end
+
   @doc """
   Gets a single lesson.
 
