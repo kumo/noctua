@@ -43,9 +43,10 @@ defmodule Noctua.Teaching do
 
   def list_teachers_with_this_month_lessons_count(%Noctua.Enroling.Student{} = student) do
     Teacher
-    |> Teacher.with_this_month_lessons_count(student)
+    |> Teacher.with_this_month_lessons_absences_count(student)
     |> Teacher.alphabetical()
     |> Repo.all()
+    |> Enum.reject(& is_nil(&1.this_month_count) and is_nil(&1.absence_count))
   end
 
   @doc """

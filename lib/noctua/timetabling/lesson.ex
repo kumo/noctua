@@ -30,6 +30,14 @@ defmodule Noctua.Timetabling.Lesson do
     from c in query, order_by: c.started_at
   end
 
+  def absent(query) do
+    from c in query, where: c.absent == true
+  end
+
+  def present(query) do
+    from c in query, where: is_nil(c.absent) or c.absent != true
+  end
+
   def today(query) do
     today = Timex.now() |> Timex.beginning_of_day()
 

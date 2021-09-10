@@ -31,6 +31,9 @@
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Questa mese
               </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Assenze questa mese
+              </th>
               <th scope="col" class="relative px-6 py-3">
                 <span class="sr-only">Edit</span>
               </th>
@@ -53,6 +56,9 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 <%= student.this_month_count %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <%= student.absence_count %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <span><%= link "Show", to: Routes.student_path(@conn, :show, student), class: "text-indigo-600 hover:text-indigo-900" %></span>

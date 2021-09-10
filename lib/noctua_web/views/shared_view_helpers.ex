@@ -5,8 +5,8 @@ defmodule NoctuaWeb.SharedViewHelpers do
 
   use Phoenix.HTML
 
-  def lessons_count(0) do
-    "Nessuna lezione"
+  def lessons_count(n)  when n == 0 or is_nil(n) do
+    ""
   end
 
   def lessons_count(1) do
@@ -15,6 +15,22 @@ defmodule NoctuaWeb.SharedViewHelpers do
 
   def lessons_count(n) do
     "#{n} lezioni"
+  end
+
+  def absents_count(nil) do
+    ""
+  end
+
+  def absents_count(0) do
+    ""
+  end
+
+  def absents_count(1) do
+    "1 assenza"
+  end
+
+  def absents_count(n) do
+    "#{n} assenze"
   end
 
   def initials(person) do

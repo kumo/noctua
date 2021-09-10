@@ -15,6 +15,7 @@ defmodule Noctua.Teaching.Teacher do
     field :this_week_count, :integer, virtual: true
     field :this_month_count, :integer, virtual: true
     field :last_month_count, :integer, virtual: true
+    field :absence_count, :integer, virtual: true
 
     timestamps()
   end
@@ -58,5 +59,15 @@ defmodule Noctua.Teaching.Teacher do
     from q in query,
       join: ltd in subquery(this_month_query), on: ltd.teacher_id == q.id,
       select_merge: %{this_month_count: ltd.count}
+  end
+
+  def with_this_month_lessons_absences_count(query, %Noctua.Enroling.Student{} = student) do
+    this_month_lessons_query = Lesson |> Lesson.count_for_teachers() |> Lesson.present() |> where([l], l.student_id == ^student.id) |> Lesson.this_month()
+    this_month_absences_query = Lesson |> Lesson.count_for_teachers() |> Lesson.absent() |> where([l], l.student_id == ^student.id) |> Lesson.this_month()
+
+    from q in query,
+      left_join: ltm in subquery(this_month_lessons_query), on: ltm.teacher_id == q.id,
+      left_join: atm in subquery(this_month_absences_query), on: atm.teacher_id == q.id,
+      select_merge: %{this_month_count: ltm.count, absence_count: atm.count}
   end
 end
