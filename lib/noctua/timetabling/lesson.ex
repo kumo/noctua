@@ -52,6 +52,18 @@ defmodule Noctua.Timetabling.Lesson do
     from c in query, where: c.started_at >= ^last_month and c.started_at < ^this_month
   end
 
+  def count_for_teachers(query) do
+    query
+    |> group_by(:teacher_id)
+    |> select([l], %{teacher_id: l.teacher_id, count: count(l.id)})      
+  end
+
+  def count_for_students(query) do
+    query
+    |> group_by(:student_id)
+    |> select([l], %{student_id: l.student_id, count: count(l.id)})      
+  end
+
   defp timey_wimey(changeset) do
     case changeset do
       %Ecto.Changeset{
