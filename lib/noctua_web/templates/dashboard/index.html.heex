@@ -71,8 +71,9 @@
 <%= for lesson <- @lessons do %>
 
             <tr class="bg-white">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                <%= Timex.format!(lesson.started_at, "{h24}:{0m}") %>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <span class="font-medium text-gray-900"><%= Timex.format!(lesson.started_at, "{h24}:{0m}") %></span>
+                <%= raw lesson_status(lesson) %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 <%= raw full_name_emphasised(lesson.student) %>

@@ -69,12 +69,7 @@
                 <%= raw full_name_emphasised(lesson.teacher) %>
               </td>
               <td class="px-6 py-4 text-sm text-gray-500">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                  Assente
-                </span>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                  In ritardo
-                </span>
+                <%= raw lesson_status(lesson) %>
               </td>
               <td class="px-6 py-4 text-sm text-gray-500">
                 <%= lesson.note %>

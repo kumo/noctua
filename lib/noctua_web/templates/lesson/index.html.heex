@@ -43,6 +43,7 @@
             <tr class="bg-white">
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 <%= Timex.format!(lesson.started_at, "{D}/{M}/{YYYY}") %>
+                <%= raw lesson_status(lesson) %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 <%= raw full_name_emphasised(lesson.student) %>
