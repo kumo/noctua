@@ -90,6 +90,8 @@ defmodule NoctuaWeb do
       import NoctuaWeb.ErrorHelpers
       import NoctuaWeb.Gettext
       alias NoctuaWeb.Router.Helpers, as: Routes
+
+      import NoctuaWeb.SharedViewHelpers
     end
   end
 

@@ -7,12 +7,12 @@
 
           <li class="relative col-span-1 flex shadow-sm rounded-md">
             <div class="flex-shrink-0 flex items-center justify-center w-16 bg-pink-600 text-white text-sm font-medium rounded-l-md">
-              <%= NoctuaWeb.StudentView.initials(student) %>
+              <%= initials(student) %>
             </div>
             <div class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
               <div class="flex-1 px-4 py-2 text-sm truncate">
-                <%= link "#{student.first_name} #{student.last_name}", to: Routes.student_path(@conn, :show, student), class: "text-gray-900 font-medium hover:text-gray-600" %>
-                <p class="text-gray-500"><%= format_lesson(student.today_count) %></p>
+                <%= link full_name(student), to: Routes.student_path(@conn, :show, student), class: "text-gray-900 font-medium hover:text-gray-600" %>
+                <p class="text-gray-500"><%= lessons_count(student.today_count) %></p>
               </div>
             </div>
           </li>
@@ -25,12 +25,12 @@
 
           <li class="relative col-span-1 flex shadow-sm rounded-md">
             <div class="flex-shrink-0 flex items-center justify-center w-16 bg-green-600 text-white text-sm font-medium rounded-l-md">
-              <%= NoctuaWeb.StudentView.initials(teacher) %>
+              <%= initials(teacher) %>
             </div>
             <div class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
               <div class="flex-1 px-4 py-2 text-sm truncate">
-                <%= link "#{teacher.first_name} #{teacher.last_name}", to: Routes.teacher_path(@conn, :show, teacher), class: "text-gray-900 font-medium hover:text-gray-600" %>
-                <p class="text-gray-500"><%= format_lesson(teacher.today_count) %></p>
+                <%= link full_name(teacher), to: Routes.teacher_path(@conn, :show, teacher), class: "text-gray-900 font-medium hover:text-gray-600" %>
+                <p class="text-gray-500"><%= lessons_count(teacher.today_count) %></p>
               </div>
             </div>
           </li>
@@ -75,12 +75,10 @@
                 <%= Timex.format!(lesson.started_at, "{h24}:{0m}") %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <span class="truncate"><%= lesson.student.first_name %></span> 
-                <span class="text-gray-900 font-medium"><%= lesson.student.last_name %></span>
+                <%= raw full_name_emphasised(lesson.student) %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <span class="truncate"><%= lesson.teacher.first_name %></span> 
-                <span class="text-gray-900 font-medium"><%= lesson.teacher.last_name %></span>
+                <%= raw full_name_emphasised(lesson.teacher) %>
               </td>
               <td class="px-6 py-4 text-sm text-gray-500">
                 <%= lesson.note %>
