@@ -51,4 +51,12 @@ defmodule Noctua.Enroling.Student do
       join: ltd in subquery(today_query), on: ltd.student_id == q.id,
       select_merge: %{today_count: ltd.count}
   end
+
+  def with_this_month_lessons_count(query, %Noctua.Teaching.Teacher{} = teacher) do
+    this_month_query = Lesson |> Lesson.count_for_students() |> where([l], l.teacher_id == ^teacher.id) |> Lesson.this_month()
+
+    from q in query,
+      join: ltd in subquery(this_month_query), on: ltd.student_id == q.id,
+      select_merge: %{this_month_count: ltd.count}
+  end
 end

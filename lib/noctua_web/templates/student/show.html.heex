@@ -1,36 +1,31 @@
-<h1>Show Student</h1>
 
-<ul>
+<span><%= link "Modifica studente", to: Routes.student_path(@conn, :edit, @student) %></span>
 
-  <li>
-    <strong>First name:</strong>
-    <%= @student.first_name %>
+<!-- Register for this month -->
+<h2 class="text-gray-500 text-xs font-medium uppercase tracking-wide">Registro di questa mese</h2>
+<ul role="list" class="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-3 xl:grid-cols-4 mt-3">
+
+  <!-- Teachers... -->
+
+<%= for teacher <- @teachers do %>
+
+  <li class="relative col-span-1 flex shadow-sm rounded-md">
+    <div class="flex-shrink-0 flex items-center justify-center w-16 bg-green-600 text-white text-sm font-medium rounded-l-md">
+      <%= NoctuaWeb.StudentView.initials(teacher) %>
+    </div>
+    <div class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
+      <div class="flex-1 px-4 py-2 text-sm truncate">
+        <%= link "#{teacher.first_name} #{teacher.last_name}", to: Routes.teacher_path(@conn, :show, teacher), class: "text-gray-900 font-medium hover:text-gray-600" %>
+        <p class="text-gray-500"><%= NoctuaWeb.DashboardView.format_lesson(teacher.this_month_count) %></p>
+      </div>
+    </div>
   </li>
 
-  <li>
-    <strong>Last name:</strong>
-    <%= @student.last_name %>
-  </li>
-
-  <%= if @student.lessons == [] do %>
-  This student hasn't attended any lessons.
-  <% else %>
-    <ul>
-      <%= for lesson <- @student.lessons do %>
-        <li>
-          <%= lesson.note %>
-        </li>
-      <% end %>
-    </ul>
-    <% end %>
-
+<% end %>
 
 </ul>
 
-<span><%= link "Edit", to: Routes.student_path(@conn, :edit, @student) %></span> |
-<span><%= link "Back", to: Routes.student_path(@conn, :index) %></span>
-
-<!-- This example requires Tailwind CSS v2.0+ -->
+<!-- List of lessons -->
 
 <div class="flex flex-col mt-8">
   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

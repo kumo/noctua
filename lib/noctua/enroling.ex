@@ -42,6 +42,14 @@ defmodule Noctua.Enroling do
     |> Repo.all()
   end
 
+  def list_students_with_this_month_lessons_count(%Noctua.Teaching.Teacher{} = teacher) do
+    Student
+    |> Student.with_this_month_lessons_count(teacher)
+    |> Student.alphabetical()
+    |> Repo.all()
+  end
+
+
   @doc """
   Gets a single student.
 
