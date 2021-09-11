@@ -5,7 +5,7 @@ defmodule NoctuaWeb.TeacherController do
   alias Noctua.Teaching.Teacher
 
   def index(conn, _params) do
-    teachers = Teaching.list_teachers_with_recent_lessons_count()
+    teachers = Noctua.Reporting.list_teachers_recent_stats()
     render(conn, "index.html", teachers: teachers)
   end
 
@@ -28,8 +28,8 @@ defmodule NoctuaWeb.TeacherController do
 
   def show(conn, %{"id" => id}) do
     teacher = Teaching.get_teacher!(id)
-    lessons = Noctua.Timetabling.list_month_lessons(teacher)
-    students = Noctua.Enroling.list_students_with_this_month_lessons_count(teacher)
+    lessons = Noctua.Timetabling.list_this_month_lessons(teacher)
+    students = Noctua.Reporting.list_this_months_student_stats_for_teacher(teacher)
     render(conn, "show.html", teacher: teacher, lessons: lessons, students: students)
   end
 

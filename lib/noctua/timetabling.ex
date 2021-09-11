@@ -43,7 +43,25 @@ defmodule Noctua.Timetabling do
     |> Repo.preload(:teacher)
   end
 
-  def list_month_lessons(%Noctua.Teaching.Teacher{} = teacher) do
+  def list_today_teachers do
+    Lesson
+    |> Lesson.ordered()
+    |> Lesson.today()
+    |> Repo.all()
+    |> Repo.preload(:student)
+    |> Repo.preload(:teacher)
+  end
+
+  def list_this_month_lessons do
+    Lesson
+    |> Lesson.ordered()
+    |> Lesson.this_month()
+    |> Repo.all()
+    |> Repo.preload(:student)
+    |> Repo.preload(:teacher)
+  end
+
+  def list_this_month_lessons(%Noctua.Teaching.Teacher{} = teacher) do
     Lesson
     |> Lesson.ordered()
     |> Lesson.this_month()
@@ -52,7 +70,7 @@ defmodule Noctua.Timetabling do
     |> Repo.preload(:student)
   end
 
-  def list_month_lessons(%Noctua.Enroling.Student{} = student) do
+  def list_this_month_lessons(%Noctua.Enroling.Student{} = student) do
     Lesson
     |> Lesson.ordered()
     |> Lesson.this_month()

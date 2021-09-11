@@ -63,16 +63,24 @@ defmodule Noctua.Timetabling.Lesson do
     from c in query, where: c.started_at >= ^last_month and c.started_at < ^this_month
   end
 
+  defp count_for(query, attribute) do
+    from q in query,
+      group_by: field(q, ^attribute),
+      select: %{link_id: field(q, ^attribute), count: count(q.id)}
+  end
+
   def count_for_teachers(query) do
-    query
-    |> group_by(:teacher_id)
-    |> select([l], %{teacher_id: l.teacher_id, count: count(l.id)})      
+    # query
+    # |> group_by(:teacher_id)
+    # |> select([l], %{link_id: l.teacher_id, count: count(l.id)})      
+    count_for(query, :teacher_id)
   end
 
   def count_for_students(query) do
-    query
-    |> group_by(:student_id)
-    |> select([l], %{student_id: l.student_id, count: count(l.id)})      
+    # query
+    # |> group_by(:student_id)
+    # |> select([l], %{link_id: l.student_id, count: count(l.id)})      
+    count_for(query, :student_id)
   end
 
   defp timey_wimey(changeset) do
