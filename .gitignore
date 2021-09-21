@@ -29,3 +29,10 @@ noctua-*.tar
 npm-debug.log
 /assets/node_modules/
 /node_modules/
+
+# Ignore MacOS stuff
+.DS_Store
+
+# Ignore Sublime Text files
+*.sublime-project
+*.sublime-workspace
