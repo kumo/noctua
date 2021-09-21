@@ -13,17 +13,17 @@
   </li>
 
   <li>
-    <strong>Started at:</strong>
+    <strong>Iniziata:</strong>
     <%= @lesson.started_at %>
   </li>
 
   <li>
-    <strong>Ended at:</strong>
+    <strong>Finita:</strong>
     <%= @lesson.ended_at %>
   </li>
 
   <li>
-    <strong>Late:</strong>
+    <strong>Ritardo:</strong>
     <%= @lesson.late_minutes %>
   </li>
 
@@ -44,5 +44,5 @@
 
 </ul>
 
-<span><%= link "Edit", to: Routes.lesson_path(@conn, :edit, @lesson) %></span> |
+<span><%= link "Modifica", to: Routes.lesson_path(@conn, :edit, @lesson) %></span> |
 <span><%= link "Back", to: Routes.lesson_path(@conn, :index) %></span>
