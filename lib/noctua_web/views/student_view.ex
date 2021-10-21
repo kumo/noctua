@@ -9,9 +9,13 @@ defmodule NoctuaWeb.StudentView do
     "Elenco Studenti"
   end
 
+  def title("new.html", _assigns) do
+    "Nuovo Studente"
+  end
+
   def title("edit.html", _assigns) do
     "Modifica Studente"
   end
 
-  def title(_action, _assigns), do: "Studente"
+  def title(_action, _assigns), do: "Studenti"
 end

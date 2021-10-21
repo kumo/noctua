@@ -9,9 +9,13 @@ defmodule NoctuaWeb.TeacherView do
     "Elenco Docenti"
   end
 
+  def title("new.html", _assigns) do
+    "Nuovo Docente"
+  end
+
   def title("edit.html", _assigns) do
     "Modifica Docente"
   end
 
-  def title(_action, _assigns), do: "Docente"
+  def title(_action, _assigns), do: "Docenti"
 end

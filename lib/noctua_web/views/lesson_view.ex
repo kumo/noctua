@@ -72,6 +72,6 @@ defmodule NoctuaWeb.LessonView do
     "Modifica Registro"
   end
 
-  def title(_action, _assigns), do: "Studente"
+  def title(_action, _assigns), do: "Lezioni"
 
 end
