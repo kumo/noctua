@@ -49,7 +49,7 @@ defmodule Noctua.Reporting do
   end
 
   def list_students_today_stats do
-    partial_query = teacher_lessons_query() |> Lesson.today()
+    partial_query = student_lessons_query() |> Lesson.today()
 
     Student
     |> single_stats(partial_query)
