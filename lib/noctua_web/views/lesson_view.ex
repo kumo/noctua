@@ -9,7 +9,12 @@ defmodule NoctuaWeb.LessonView do
     select(f, :student_id, student_opts, prompt: "", class: "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm")
   end
 
-  def teacher_select(f, _changeset) do
+  def teacher_select(f, _changeset, %{role: :Teacher} = user) do
+    teacher_opts = [[key: user.teacher.first_name <> " " <> user.teacher.last_name, value: user.teacher.id]]
+    select(f, :teacher_id, teacher_opts, class: "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm")
+  end
+
+  def teacher_select(f, _changeset, user) do
     teacher_opts =
       for teacher <- Noctua.Teaching.list_alphabetical_teachers(),
           do: [key: teacher.first_name <> " " <> teacher.last_name, value: teacher.id]
