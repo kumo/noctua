@@ -20,7 +20,7 @@ defmodule NoctuaWeb.LessonController do
       {:ok, lesson} ->
         conn
         |> put_flash(:info, "Lesson created successfully.")
-        |> redirect(to: Routes.lesson_path(conn, :show, lesson))
+        |> redirect(to: Routes.lesson_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
