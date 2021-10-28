@@ -19,6 +19,9 @@ defmodule Noctua.Teaching.Teacher do
     field :lesson_count, :integer, virtual: true
     field :absence_count, :integer, virtual: true
 
+    belongs_to :user, Noctua.Accounts.User
+    # field :user_id, :integer
+
     timestamps()
   end
 

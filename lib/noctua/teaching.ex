@@ -44,7 +44,7 @@ defmodule Noctua.Teaching do
   def get_teacher!(id), do: Repo.get!(Teacher, id)
 
   @doc """
-  Creates a teacher.
+  Creates a teacher. And creates a new user too.
 
   ## Examples
 
@@ -58,6 +58,7 @@ defmodule Noctua.Teaching do
   def create_teacher(attrs \\ %{}) do
     %Teacher{}
     |> Teacher.changeset(attrs)
+    |> Ecto.Changeset.cast_assoc(:user, with: &Noctua.Accounts.User.changeset_for_teacher/2)
     |> Repo.insert()
   end
 
