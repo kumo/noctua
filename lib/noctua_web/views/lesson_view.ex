@@ -4,20 +4,20 @@ defmodule NoctuaWeb.LessonView do
   def student_select(f, _changeset) do
     student_opts =
       for student <- Noctua.Enroling.list_alphabetical_students(),
-          do: [key: student.first_name <> " " <> student.last_name, value: student.id]
+          do: [key: student.last_name <> " " <> student.first_name, value: student.id]
 
     select(f, :student_id, student_opts, prompt: "", class: "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm")
   end
 
   def teacher_select(f, _changeset, %{role: :Teacher} = user) do
-    teacher_opts = [[key: user.teacher.first_name <> " " <> user.teacher.last_name, value: user.teacher.id]]
+    teacher_opts = [[key: user.teacher.last_name <> " " <> user.teacher.first_name, value: user.teacher.id]]
     select(f, :teacher_id, teacher_opts, class: "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm")
   end
 
   def teacher_select(f, _changeset, user) do
     teacher_opts =
       for teacher <- Noctua.Teaching.list_alphabetical_teachers(),
-          do: [key: teacher.first_name <> " " <> teacher.last_name, value: teacher.id]
+          do: [key: teacher.last_name <> " " <> teacher.first_name, value: teacher.id]
 
     select(f, :teacher_id, teacher_opts, prompt: "", class: "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm")
   end
