@@ -347,4 +347,19 @@ defmodule Noctua.Accounts do
       {:error, :user, changeset, _} -> {:error, changeset}
     end
   end
+
+  @doc """
+  Returns the list of users.
+
+  ## Examples
+
+      iex> list_users()
+      [%User{}, ...]
+
+  """
+  def list_users do
+    User
+    |> Repo.all()
+    |> Repo.preload(:teacher)
+  end
 end

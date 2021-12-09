@@ -14,6 +14,12 @@
 
             <%= if @current_user.role == :Admin do %>
 
+            <%= link "Utenti", to: Routes.user_path(@conn, :index), class: "px-3 py-2 text-gray-900 text-sm font-medium" %>
+
+            <% end %>
+
+            <%= if @current_user.role == :Admin or @current_user.role == :Secretary do %>
+
             <%= link "Studenti", to: Routes.student_path(@conn, :index), class: "px-3 py-2 text-gray-900 text-sm font-medium" %>
 
             <%= link "Docenti", to: Routes.teacher_path(@conn, :index), class: "px-3 py-2 text-gray-900 text-sm font-medium" %>
@@ -78,9 +84,19 @@
                 <div class="mt-3 px-2 space-y-1">
                   <a href="/" class="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800">Dashboard</a>
 
+                  <%= if @current_user.role == :Admin do %>
+
+                  <%= link "Utenti", to: Routes.user_path(@conn, :index), class: "px-3 py-2 text-gray-900 text-sm font-medium" %>
+
+                  <% end %>
+
+                  <%= if @current_user.role == :Admin or @current_user.role == :Secretary do %>
+
                   <%= link "Studenti", to: Routes.student_path(@conn, :index), class: "px-3 py-2 text-gray-900 text-sm font-medium" %>
 
                   <%= link "Docenti", to: Routes.teacher_path(@conn, :index), class: "px-3 py-2 text-gray-900 text-sm font-medium" %>
+
+                  <% end %>
 
                   <%= link "Registri", to: Routes.lesson_path(@conn, :index), class: "px-3 py-2 text-gray-900 text-sm font-medium" %>
                 </div>
