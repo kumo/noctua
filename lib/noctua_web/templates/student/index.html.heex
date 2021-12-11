@@ -45,7 +45,7 @@
 
             <tr class="bg-white">
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <%= link to: Routes.student_path(@conn, :show, student), class: "text-indigo-600 hover:text-indigo-900" do %>
+                <%= link to: Routes.student_path(@conn, :edit, student), class: "text-indigo-600 hover:text-indigo-900" do %>
                 <span class="truncate"><%= student.first_name %></span> 
                 <span class="font-medium"><%= student.last_name %></span>
                 <%= end %>
@@ -63,7 +63,7 @@
                 <%= student.absence_count %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <span><%= link "Modifica", to: Routes.student_path(@conn, :edit, student), class: "text-indigo-600 hover:text-indigo-900" %></span>
+                <span><%= link "Registro", to: Routes.student_path(@conn, :show, student), class: "text-indigo-600 hover:text-indigo-900" %></span>
               </td>
             </tr>
 
