@@ -30,6 +30,10 @@ defmodule Noctua.Timetabling.Lesson do
     from c in query, order_by: c.started_at
   end
 
+  def reverse_ordered(query) do
+    from c in query, order_by: [desc: c.started_at]
+  end
+
   def absent(query) do
     from c in query, where: c.absent == true
   end

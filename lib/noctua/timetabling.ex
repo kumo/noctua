@@ -27,7 +27,7 @@ defmodule Noctua.Timetabling do
 
   def list_ordered_lessons do
     Lesson
-    |> Lesson.ordered()
+    |> Lesson.reverse_ordered()
     |> Repo.all()
     |> Repo.preload(:student)
     |> Repo.preload(:teacher)
