@@ -41,7 +41,11 @@ defmodule Noctua.Teaching do
       ** (Ecto.NoResultsError)
 
   """
-  def get_teacher!(id), do: Repo.get!(Teacher, id)
+  def get_teacher!(id) do
+    Teacher
+    |> Repo.get!(id)
+    |> Repo.preload(:user)
+  end
 
   @doc """
   Creates a teacher. And creates a new user too.
