@@ -171,7 +171,7 @@
                     <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
                   </svg>
                   <%= if assigns[:student] do %>
-                  <%= link full_name(@student), to: Routes.teacher_path(@conn, :show, @student), class: "ml-4 text-sm font-medium text-gray-500 hover:text-gray-700" %>
+                  <%= link full_name(@student), to: Routes.student_path(@conn, :show, @student), class: "ml-4 text-sm font-medium text-gray-500 hover:text-gray-700" %>
                   <% end %>
                   <%= if assigns[:teacher] do %>
                   <%= link full_name(@teacher), to: Routes.teacher_path(@conn, :show, @teacher), class: "ml-4 text-sm font-medium text-gray-500 hover:text-gray-700" %>
