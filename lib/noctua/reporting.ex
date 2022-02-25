@@ -71,7 +71,7 @@ defmodule Noctua.Reporting do
     partial_query = teacher_lessons_query() # no date
 
     Teacher
-    |> all_stats(partial_query)
+    |> all_combined_stats(partial_query)
     |> Teacher.alphabetical()
     |> Repo.all()
   end
@@ -92,6 +92,18 @@ defmodule Noctua.Reporting do
       left_join: twq in subquery(present_query |> Lesson.this_week), on: twq.link_id == q.id,
       left_join: tmq in subquery(present_query |> Lesson.this_month), on: tmq.link_id == q.id,
       left_join: lmq in subquery(present_query |> Lesson.last_month), on: lmq.link_id == q.id,
+      left_join: tmaq in subquery(absent_query |> Lesson.this_month), on: tmaq.link_id == q.id,
+      select_merge: %{today_count: tdq.count, this_week_count: twq.count, this_month_count: tmq.count, last_month_count: lmq.count, absence_count: tmaq.count}
+  end
+
+  defp all_combined_stats(query, partial_query) do
+    absent_query = partial_query |> Lesson.absent
+
+    from q in query,
+      left_join: tdq in subquery(partial_query |> Lesson.today), on: tdq.link_id == q.id,
+      left_join: twq in subquery(partial_query |> Lesson.this_week), on: twq.link_id == q.id,
+      left_join: tmq in subquery(partial_query |> Lesson.this_month), on: tmq.link_id == q.id,
+      left_join: lmq in subquery(partial_query |> Lesson.last_month), on: lmq.link_id == q.id,
       left_join: tmaq in subquery(absent_query |> Lesson.this_month), on: tmaq.link_id == q.id,
       select_merge: %{today_count: tdq.count, this_week_count: twq.count, this_month_count: tmq.count, last_month_count: lmq.count, absence_count: tmaq.count}
   end
