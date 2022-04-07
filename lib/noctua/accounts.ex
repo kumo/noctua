@@ -363,6 +363,12 @@ defmodule Noctua.Accounts do
     |> Repo.preload(:teacher)
   end
 
+  def list_alphabetical_users do
+    User
+    |> User.alphabetical()
+    |> Repo.all()
+  end
+
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking user changes.
 
