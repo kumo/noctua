@@ -1,11 +1,24 @@
 defmodule NoctuaWeb.StudentControllerTest do
-  use NoctuaWeb.ConnCase
+  use NoctuaWeb.ConnCase, async: true
 
   import Noctua.EnrolingFixtures
+  alias NoctuaWeb.UserAuth
+  import Noctua.AccountsFixtures
 
   @create_attrs %{first_name: "some first_name", last_name: "some last_name"}
   @update_attrs %{first_name: "some updated first_name", last_name: "some updated last_name"}
   @invalid_attrs %{first_name: nil, last_name: nil}
+
+  @remember_me_cookie "_noctua_web_user_remember_me"
+
+  setup %{conn: conn} do
+    conn =
+      conn
+      |> Map.replace!(:secret_key_base, NoctuaWeb.Endpoint.config(:secret_key_base))
+      |> init_test_session(%{})
+
+    %{user: user_fixture(), conn: conn}
+  end
 
   describe "index" do
     test "lists all students", %{conn: conn} do
