@@ -1,8 +1,6 @@
 defmodule NoctuaWeb.DashboardController do
   use NoctuaWeb, :controller
   alias Noctua.Timetabling
-  alias Noctua.Enroling
-  alias Noctua.Teaching
   alias Noctua.Reporting
 
   def index(conn, _params) do
