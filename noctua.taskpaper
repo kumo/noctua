@@ -1,0 +1,69 @@
+Inbox:
+	- A teacher can teach a block of lessons with a single student
+		The subject might be the same or it might be different
+	- Terri needs a monthly total of hours for each teacher
+	Each type of lesson is paid in a different way and at different times
+	- The teacher should see today's inserted entries, but it isn't clear about yesterday or earlier
+	- Personal details should be private and only visible to that user and admin
+	If a student has a 3 lesson block, and they don't turn up, how many absences are there? 1 or 3?
+	- create_teacher should be able to add role without needing create_student as well
+	- Tests don't pass due to authentication and relationships
+noctua:
+	New Features:
+		- Teachers should be assigned to students and only see them in the list
+		- Teachers should be able to add notes for each student, and these should be seen by the parents
+		- A user should be able to reset their password @priority(2) @authentication
+	Ideas:
+		- Could use office-building and video-camera icons to distinguish lessons @maybe
+			If the system is used not just for online lessons, but also athena lessons, icons could be a quick way of indicating which lesson type
+		- Could use clock icon to show arriving late or leaving early @maybe
+		- Show teachers an absent-specific link and form @maybe
+		- Lists with dates could be grouped by week or month
+		- Terri suggests P and A can be shown in list of lessons to indicate if student was there or not @maybe
+		- A teacher could have a link to login, rather than username and password
+	Bugs:
+		- When a user logs out, the the flash message says that they have successfully logged out, and also that they must log in to access this page
+		- Form dates should appear in Italian @na
+			There is a Cldr plugin (https://hexdocs.pm/ex_cldr_dates_times/2.9.3/readme.html), but I don't know if it does what I want
+		- Errors should appear in Italian
+		- Links should appear in Italian
+		- Teacher form is in English @done(2022-02-16)
+		- Student form is in English @done(2022-02-16)
+		- There is no modify teacher link on the teacher's registry page
+		- There is no modify student link on the student's registry page
+		- Pages should be private
+		- A lesson can't be deleted
+		- The lesson count for the teacher should include absent lessons @done(2022-02-25)
+		- Dynamic title code in root.html.heex crashes if there is no title function in the view
+		- If there are no lessons today, the dashboard is ugly
+		- Logout link gives "page not found" error @done
+		- Production code/server doesn't have JavaScript @done
+		- Secretary account is unable to edit a teacher @done
+			Request: GET /teachers/2/edit ** (ArgumentError) using inputs_for for association `user` from `Noctua.Teaching.Teacher` but it was not loaded. Please preload your associations before using them in inputs_for
+Archive:
+	- Teachers should be able to login @done(2021-10-28) @project(noctua / New Features)
+	- Student and teacher forms don't have any formatting @done(2021-10-21) @project(noctua / Bugs)
+	- No-one should be able to register a new account @done(2021-10-28) @project(noctua / Bugs)
+	- A lesson could start 5, 10, 15, or 20 minutes late @done(2021-09-10) @project(noctua / New Features)
+	- A student can be absent for a lesson @done(2021-09-10) @project(noctua / New Features)
+		If they didn't write 24 hours before, it should be paid for
+	- The total absences for this month should be known for each student @done(2021-09-10) @project(noctua / New Features)
+	- A lesson could end 5, 10, 15, or 20 minutes early @done(2021-09-10) @project(noctua / New Features)
+	- Show this months lessons on student page @done(2021-09-10) @project(noctua / New Features)
+	- Show summary of hours with each teacher for this month on student page @done(2021-09-10) @project(noctua / New Features)
+	- Show summary of absences for this month on student page @done(2021-09-10) @project(noctua / New Features)
+	- Show this months lessons on teacher page @done(2021-09-10) @project(noctua / New Features)
+	- Show summary of hours with each student for this month on teacher page @done(2021-09-10) @project(noctua / New Features)
+	- Show last month's hours on teacher list @done(2021-09-09) @project(noctua / New Features)
+	- Show this month's hours on teacher list @done(2021-09-09) @project(noctua / New Features)
+	- Lesson hours should be from 8 to 21 @done(2021-09-09) @project(noctua / Bugs)
+	- Lesson hours 8 and 9 weren't accepted @done(2021-09-10) @project(noctua / Bugs)
+	- "1 lezioni" should appear as "1 lezione" @done(2021-09-10) @project(noctua / Bugs)
+	- Student list of dashboard is showing wrong students @done(2021-10-26) @project(noctua / Bugs)
+	- Website doesn't work on mobile devices due to a background @done(2021-10-26) @project(noctua / Bugs)
+Search Definitions:
+	Top Priority @search(@priority = 5 and not @done)
+	High Priority @search(@priority > 3 and not @done)
+	Maybe @search(@maybe)
+	Next @search(@na and not @done and not project = "Archive")
+
