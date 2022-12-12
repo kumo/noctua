@@ -17,7 +17,7 @@ defmodule NoctuaWeb.LessonController do
 
   def create(conn, %{"lesson" => lesson_params}) do
     case Timetabling.create_lesson(lesson_params) do
-      {:ok, lesson} ->
+      {:ok, _lesson} ->
         conn
         |> put_flash(:info, "Lesson created successfully.")
         |> redirect(to: Routes.lesson_path(conn, :index))
