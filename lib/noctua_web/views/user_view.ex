@@ -19,20 +19,19 @@ defmodule NoctuaWeb.UserView do
 
   def title(_action, _assigns), do: "Utenti"
 
-  def show_role(%Noctua.Accounts.User{role: :Admin} = user) do
+  def show_role(%Noctua.Accounts.User{role: :Admin} = _user) do
     "🧑🏻‍💻‍ - Admin"
   end
 
-  def show_role(%Noctua.Accounts.User{role: :Secretary} = user) do
+  def show_role(%Noctua.Accounts.User{role: :Secretary} = _user) do
     "🧑🏻‍💼 - Segreteria"
   end
 
-def show_role(%Noctua.Accounts.User{role: :Teacher, teacher: nil} = user) do
+  def show_role(%Noctua.Accounts.User{role: :Teacher, teacher: nil} = _user) do
     "🧑🏻‍🏫" <> " - " <> "???"
   end
-  
+
   def show_role(%Noctua.Accounts.User{role: :Teacher} = user) do
     "🧑🏻‍🏫" <> " - " <> full_name(user.teacher)
   end
-
 end
