@@ -25,7 +25,7 @@ defmodule Noctua.Reporting do
     |> single_stats(partial_query)
     |> Teacher.alphabetical()
     |> Repo.all()
-    |> Enum.reject(& is_nil(&1.lesson_count) and is_nil(&1.absence_count))
+    |> Enum.reject(&(is_nil(&1.lesson_count) and is_nil(&1.absence_count)))
   end
 
   def list_this_months_teacher_stats_for_student(%Noctua.Enroling.Student{} = student) do
@@ -35,7 +35,7 @@ defmodule Noctua.Reporting do
     |> all_stats(partial_query)
     |> Teacher.alphabetical()
     |> Repo.all()
-    |> Enum.reject(& is_nil(&1.this_month_count) and is_nil(&1.absence_count))
+    |> Enum.reject(&(is_nil(&1.this_month_count) and is_nil(&1.absence_count)))
   end
 
   def list_this_months_student_stats_for_teacher(%Noctua.Teaching.Teacher{} = teacher) do
@@ -45,7 +45,7 @@ defmodule Noctua.Reporting do
     |> all_stats(partial_query)
     |> Student.alphabetical()
     |> Repo.all()
-    |> Enum.reject(& is_nil(&1.this_month_count) and is_nil(&1.absence_count))
+    |> Enum.reject(&(is_nil(&1.this_month_count) and is_nil(&1.absence_count)))
   end
 
   def list_students_today_stats do
@@ -55,7 +55,7 @@ defmodule Noctua.Reporting do
     |> single_stats(partial_query)
     |> Student.alphabetical()
     |> Repo.all()
-    |> Enum.reject(& is_nil(&1.lesson_count) and is_nil(&1.absence_count))
+    |> Enum.reject(&(is_nil(&1.lesson_count) and is_nil(&1.absence_count)))
   end
 
   def list_students_recent_stats do
