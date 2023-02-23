@@ -22,6 +22,7 @@ defmodule Noctua.Timetabling do
     |> Repo.all()
     |> Repo.preload(:student)
     |> Repo.preload(:teacher)
+
     # Repo.all(Lesson), preload: [:student, :teacher])
   end
 
@@ -31,6 +32,7 @@ defmodule Noctua.Timetabling do
     |> Repo.all()
     |> Repo.preload(:student)
     |> Repo.preload(:teacher)
+
     # Repo.all(Lesson), preload: [:student, :teacher])
   end
 

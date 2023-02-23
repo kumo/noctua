@@ -4,7 +4,8 @@ defmodule Noctua.Timetabling.Lesson do
   import Ecto.Query
 
   schema "lessons" do
-    field :ended_at, :naive_datetime # I wonder if when is more suitable? I could just do time for start and end
+    # I wonder if when is more suitable? I could just do time for start and end
+    field :ended_at, :naive_datetime
     field :note, :string
     field :started_at, :naive_datetime
     field :late_minutes, :integer
@@ -21,7 +22,18 @@ defmodule Noctua.Timetabling.Lesson do
   @doc false
   def changeset(lesson, attrs) do
     lesson
-    |> cast(attrs, [:started_at, :ended_at, :note, :student_id, :teacher_id, :date, :time, :late_minutes, :left_early_minutes, :absent])
+    |> cast(attrs, [
+      :started_at,
+      :ended_at,
+      :note,
+      :student_id,
+      :teacher_id,
+      :date,
+      :time,
+      :late_minutes,
+      :left_early_minutes,
+      :absent
+    ])
     |> timey_wimey()
     |> validate_required([:started_at, :ended_at, :student_id, :teacher_id])
   end
@@ -102,6 +114,7 @@ defmodule Noctua.Timetabling.Lesson do
           {:error, _} ->
             add_error(changeset, :date, "Invalid Date")
         end
+
       _ ->
         changeset
     end
