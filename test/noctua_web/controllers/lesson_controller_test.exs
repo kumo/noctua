@@ -3,8 +3,16 @@ defmodule NoctuaWeb.LessonControllerTest do
 
   import Noctua.TimetablingFixtures
 
-  @create_attrs %{ended_at: ~N[2021-09-06 12:37:00], note: "some note", started_at: ~N[2021-09-06 12:37:00]}
-  @update_attrs %{ended_at: ~N[2021-09-07 12:37:00], note: "some updated note", started_at: ~N[2021-09-07 12:37:00]}
+  @create_attrs %{
+    ended_at: ~N[2021-09-06 12:37:00],
+    note: "some note",
+    started_at: ~N[2021-09-06 12:37:00]
+  }
+  @update_attrs %{
+    ended_at: ~N[2021-09-07 12:37:00],
+    note: "some updated note",
+    started_at: ~N[2021-09-07 12:37:00]
+  }
   @invalid_attrs %{ended_at: nil, note: nil, started_at: nil}
 
   describe "index" do
