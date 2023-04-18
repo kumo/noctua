@@ -5,7 +5,7 @@ defmodule NoctuaWeb.SharedViewHelpers do
 
   use Phoenix.HTML
 
-  def lessons_count(n)  when n == 0 or is_nil(n) do
+  def lessons_count(n) when n == 0 or is_nil(n) do
     ""
   end
 
