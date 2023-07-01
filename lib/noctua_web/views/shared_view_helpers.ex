@@ -34,7 +34,7 @@ defmodule NoctuaWeb.SharedViewHelpers do
   end
 
   def initials(person) do
-    "#{String.at(person.first_name, 0)}#{String.at(person.last_name, 0)}"  
+    "#{String.at(person.first_name, 0)}#{String.at(person.last_name, 0)}"
   end
 
   def full_name(person) do
