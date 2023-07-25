@@ -7,6 +7,8 @@ defmodule Noctua.TimetablingTest do
     alias Noctua.Timetabling.Lesson
 
     import Noctua.TimetablingFixtures
+    import Noctua.TeachingFixtures
+    import Noctua.EnrolingFixtures
 
     @invalid_attrs %{ended_at: nil, note: nil, started_at: nil}
 
