@@ -78,5 +78,4 @@ defmodule NoctuaWeb.LessonView do
   end
 
   def title(_action, _assigns), do: "Lezioni"
-
 end
