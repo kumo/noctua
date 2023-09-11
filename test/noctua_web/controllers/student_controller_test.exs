@@ -2,8 +2,6 @@ defmodule NoctuaWeb.StudentControllerTest do
   use NoctuaWeb.ConnCase, async: true
 
   import Noctua.EnrolingFixtures
-  alias NoctuaWeb.UserAuth
-  import Noctua.AccountsFixtures
 
   @create_attrs %{first_name: "some first_name", last_name: "some last_name"}
   @update_attrs %{first_name: "some updated first_name", last_name: "some updated last_name"}
