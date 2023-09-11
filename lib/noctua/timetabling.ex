@@ -97,7 +97,14 @@ defmodule Noctua.Timetabling do
   """
   def get_lesson!(id) do
     Lesson
-    |> Repo.get(id)
+    |> Repo.get!(id)
+    # |> Repo.preload(:student)
+    # |> Repo.preload(:teacher)
+  end
+
+  def get_lesson_with_users!(id) do
+    Lesson
+    |> Repo.get!(id)
     |> Repo.preload(:student)
     |> Repo.preload(:teacher)
   end
