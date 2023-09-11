@@ -11,14 +11,7 @@ defmodule NoctuaWeb.StudentControllerTest do
 
   @remember_me_cookie "_noctua_web_user_remember_me"
 
-  setup %{conn: conn} do
-    conn =
-      conn
-      |> Map.replace!(:secret_key_base, NoctuaWeb.Endpoint.config(:secret_key_base))
-      |> init_test_session(%{})
-
-    %{user: user_fixture(), conn: conn}
-  end
+  setup :register_and_log_in_user
 
   describe "index" do
     test "lists all students", %{conn: conn} do

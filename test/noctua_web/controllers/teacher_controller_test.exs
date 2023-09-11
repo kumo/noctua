@@ -7,6 +7,8 @@ defmodule NoctuaWeb.TeacherControllerTest do
   @update_attrs %{first_name: "some updated first_name", last_name: "some updated last_name"}
   @invalid_attrs %{first_name: nil, last_name: nil}
 
+  setup :register_and_log_in_user
+
   describe "index" do
     test "lists all teachers", %{conn: conn} do
       conn = get(conn, Routes.teacher_path(conn, :index))

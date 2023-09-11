@@ -15,6 +15,8 @@ defmodule NoctuaWeb.LessonControllerTest do
   }
   @invalid_attrs %{ended_at: nil, note: nil, started_at: nil}
 
+  setup :register_and_log_in_user
+
   describe "index" do
     test "lists all lessons", %{conn: conn} do
       conn = get(conn, Routes.lesson_path(conn, :index))
