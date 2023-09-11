@@ -16,14 +16,14 @@ defmodule NoctuaWeb.StudentControllerTest do
   describe "index" do
     test "lists all students", %{conn: conn} do
       conn = get(conn, Routes.student_path(conn, :index))
-      assert html_response(conn, 200) =~ "Listing Students"
+      assert html_response(conn, 200) =~ "Elenco Studenti"
     end
   end
 
   describe "new student" do
     test "renders form", %{conn: conn} do
       conn = get(conn, Routes.student_path(conn, :new))
-      assert html_response(conn, 200) =~ "New Student"
+      assert html_response(conn, 200) =~ "Nuovo Studente"
     end
   end
 
@@ -35,12 +35,12 @@ defmodule NoctuaWeb.StudentControllerTest do
       assert redirected_to(conn) == Routes.student_path(conn, :show, id)
 
       conn = get(conn, Routes.student_path(conn, :show, id))
-      assert html_response(conn, 200) =~ "Show Student"
+      assert html_response(conn, 200) =~ "Mostra Studente"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, Routes.student_path(conn, :create), student: @invalid_attrs)
-      assert html_response(conn, 200) =~ "New Student"
+      assert html_response(conn, 200) =~ "Nuovo Studente"
     end
   end
 
@@ -49,7 +49,7 @@ defmodule NoctuaWeb.StudentControllerTest do
 
     test "renders form for editing chosen student", %{conn: conn, student: student} do
       conn = get(conn, Routes.student_path(conn, :edit, student))
-      assert html_response(conn, 200) =~ "Edit Student"
+      assert html_response(conn, 200) =~ "Modifica Studente"
     end
   end
 
@@ -66,7 +66,7 @@ defmodule NoctuaWeb.StudentControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn, student: student} do
       conn = put(conn, Routes.student_path(conn, :update, student), student: @invalid_attrs)
-      assert html_response(conn, 200) =~ "Edit Student"
+      assert html_response(conn, 200) =~ "Modifica Studente"
     end
   end
 

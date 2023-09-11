@@ -12,14 +12,14 @@ defmodule NoctuaWeb.TeacherControllerTest do
   describe "index" do
     test "lists all teachers", %{conn: conn} do
       conn = get(conn, Routes.teacher_path(conn, :index))
-      assert html_response(conn, 200) =~ "Listing Teachers"
+      assert html_response(conn, 200) =~ "Elenco Docenti"
     end
   end
 
   describe "new teacher" do
     test "renders form", %{conn: conn} do
       conn = get(conn, Routes.teacher_path(conn, :new))
-      assert html_response(conn, 200) =~ "New Teacher"
+      assert html_response(conn, 200) =~ "Nuovo Docente"
     end
   end
 
@@ -31,12 +31,12 @@ defmodule NoctuaWeb.TeacherControllerTest do
       assert redirected_to(conn) == Routes.teacher_path(conn, :show, id)
 
       conn = get(conn, Routes.teacher_path(conn, :show, id))
-      assert html_response(conn, 200) =~ "Show Teacher"
+      assert html_response(conn, 200) =~ "some last_name"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, Routes.teacher_path(conn, :create), teacher: @invalid_attrs)
-      assert html_response(conn, 200) =~ "New Teacher"
+      assert html_response(conn, 200) =~ "Nuovo Docente"
     end
   end
 
