@@ -4,6 +4,8 @@ defmodule NoctuaWeb.LessonController do
   alias Noctua.Timetabling
   alias Noctua.Timetabling.Lesson
 
+  require Logger
+
   def index(conn, _params) do
     lessons = Timetabling.list_ordered_lessons()
     render(conn, "index.html", lessons: lessons)
@@ -28,7 +30,7 @@ defmodule NoctuaWeb.LessonController do
   end
 
   def show(conn, %{"id" => id}) do
-    lesson = Timetabling.get_lesson!(id)
+    lesson = Timetabling.get_lesson_with_users!(id)
     render(conn, "show.html", lesson: lesson)
   end
 

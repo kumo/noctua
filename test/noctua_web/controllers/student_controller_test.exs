@@ -7,8 +7,6 @@ defmodule NoctuaWeb.StudentControllerTest do
   @update_attrs %{first_name: "some updated first_name", last_name: "some updated last_name"}
   @invalid_attrs %{first_name: nil, last_name: nil}
 
-  @remember_me_cookie "_noctua_web_user_remember_me"
-
   setup :register_and_log_in_user
 
   describe "index" do
@@ -33,7 +31,7 @@ defmodule NoctuaWeb.StudentControllerTest do
       assert redirected_to(conn) == Routes.student_path(conn, :show, id)
 
       conn = get(conn, Routes.student_path(conn, :show, id))
-      assert html_response(conn, 200) =~ "Mostra Studente"
+      assert html_response(conn, 200) =~ "some first_name"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do

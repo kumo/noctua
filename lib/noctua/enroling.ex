@@ -43,8 +43,8 @@ defmodule Noctua.Enroling do
   """
   def get_student!(id) do
     Student
-    |> Repo.get(id)
-    |> Repo.preload(:lessons)
+    |> Repo.get!(id)
+    # |> Repo.preload(:lessons)
   end
 
   @doc """

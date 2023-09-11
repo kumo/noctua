@@ -1,5 +1,5 @@
 defmodule NoctuaWeb.TeacherControllerTest do
-  use NoctuaWeb.ConnCase
+  use NoctuaWeb.ConnCase, async: true
 
   import Noctua.TeachingFixtures
 
@@ -45,7 +45,7 @@ defmodule NoctuaWeb.TeacherControllerTest do
 
     test "renders form for editing chosen teacher", %{conn: conn, teacher: teacher} do
       conn = get(conn, Routes.teacher_path(conn, :edit, teacher))
-      assert html_response(conn, 200) =~ "Edit Teacher"
+      assert html_response(conn, 200) =~ "some first_name"
     end
   end
 
@@ -62,7 +62,7 @@ defmodule NoctuaWeb.TeacherControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn, teacher: teacher} do
       conn = put(conn, Routes.teacher_path(conn, :update, teacher), teacher: @invalid_attrs)
-      assert html_response(conn, 200) =~ "Edit Teacher"
+      assert html_response(conn, 200) =~ "some first_name"
     end
   end
 

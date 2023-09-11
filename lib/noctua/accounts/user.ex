@@ -39,6 +39,13 @@ defmodule Noctua.Accounts.User do
     |> validate_password(opts)
   end
 
+  def changeset(user, attrs, opts \\ []) do
+    user
+    |> cast(attrs, [:email, :password])
+    |> validate_email()
+    |> validate_password(opts)
+  end
+
   def changeset_for_teacher(user, attrs, opts \\ []) do
     user
     |> cast(attrs, [:email, :password])

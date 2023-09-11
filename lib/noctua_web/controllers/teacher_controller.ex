@@ -34,13 +34,13 @@ defmodule NoctuaWeb.TeacherController do
   end
 
   def edit(conn, %{"id" => id}) do
-    teacher = Teaching.get_teacher!(id)
+    teacher = Teaching.get_teacher_with_user!(id)
     changeset = Teaching.change_teacher(teacher)
     render(conn, "edit.html", teacher: teacher, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "teacher" => teacher_params}) do
-    teacher = Teaching.get_teacher!(id)
+    teacher = Teaching.get_teacher_with_user!(id)
 
     case Teaching.update_teacher(teacher, teacher_params) do
       {:ok, teacher} ->
