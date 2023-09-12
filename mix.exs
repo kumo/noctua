@@ -34,7 +34,7 @@ defmodule Noctua.MixProject do
   defp deps do
     [
       {:bcrypt_elixir, "~> 2.0"},
-      {:phoenix, "~> 1.6.2"},
+      {:phoenix, "~> 1.7"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
       {:postgrex, ">= 0.0.0"},
@@ -51,7 +51,6 @@ defmodule Noctua.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:phx_gen_tailwind, "~> 0.1.3", only: :dev},
       {:timex, "~> 3.0"}
     ]
   end
