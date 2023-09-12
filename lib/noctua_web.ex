@@ -92,6 +92,9 @@ defmodule NoctuaWeb do
       alias NoctuaWeb.Router.Helpers, as: Routes
 
       import NoctuaWeb.SharedViewHelpers
+
+      use Phoenix.Component
+      import Phoenix.HTML.Form
     end
   end
 
