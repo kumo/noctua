@@ -13,10 +13,12 @@ config :noctua,
 # Configures the endpoint
 config :noctua, NoctuaWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "MHspug8ukBPTpWO0E2IpjGIWhZ+X4K+vfTlq3s2OihGhqmy9xyCyJ96INraawNWK",
-  render_errors: [view: NoctuaWeb.ErrorView, accepts: ~w(html json), layout: false],
+  render_errors: [
+    formats: [html: NoctuaWeb.ErrorHTML, json: NoctuaWeb.ErrorJSON],
+    layout: false
+  ],
   pubsub_server: Noctua.PubSub,
-  live_view: [signing_salt: "9KBSw5c3"]
+  live_view: [signing_salt: "GLLxD2sX"]
 
 # Configures the mailer
 #
@@ -26,9 +28,6 @@ config :noctua, NoctuaWeb.Endpoint,
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
 config :noctua, Noctua.Mailer, adapter: Swoosh.Adapters.Local
-
-# Swoosh API client is needed for adapters other than SMTP.
-config :swoosh, :api_client, false
 
 # Configure esbuild (the version is required)
 config :esbuild,
@@ -42,7 +41,7 @@ config :esbuild,
 
 # Configure tailwind (the version is required)
 config :tailwind,
-  version: "3.2.7",
+  version: "3.3.2",
   default: [
     args: ~w(
       --config=tailwind.config.js

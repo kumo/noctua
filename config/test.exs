@@ -1,8 +1,5 @@
 import Config
 
-# Only in tests, remove the complexity from the password hashing algorithm
-config :bcrypt_elixir, :log_rounds, 1
-
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used
@@ -11,8 +8,8 @@ config :bcrypt_elixir, :log_rounds, 1
 config :noctua, Noctua.Repo,
   username: "postgres",
   password: "postgres",
-  database: "noctua_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost",
+  database: "noctua_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 
@@ -20,13 +17,17 @@ config :noctua, Noctua.Repo,
 # you can enable the server option below.
 config :noctua, NoctuaWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
+  secret_key_base: "CEEmZLGMelI4R9153PJPdNbH6X/aTcMYimZ+TVbM9AT6mTkC0YR3d6VSL2eYLxLQ",
   server: false
 
 # In test we don't send emails.
 config :noctua, Noctua.Mailer, adapter: Swoosh.Adapters.Test
 
+# Disable swoosh api client as it is only required for production adapters.
+config :swoosh, :api_client, false
+
 # Print only warnings and errors during test
-config :logger, level: :warn
+config :logger, level: :warning
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
