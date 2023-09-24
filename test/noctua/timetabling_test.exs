@@ -24,13 +24,20 @@ defmodule Noctua.TimetablingTest do
 
     test "get_lesson_with_users!/1 returns the lesson with given id" do
       lesson = lesson_fixture()
-      lesson = %{lesson | student: Noctua.Enroling.get_student!(lesson.student_id), teacher: Noctua.Teaching.get_teacher!(lesson.teacher_id)}
+
+      lesson = %{
+        lesson
+        | student: Noctua.Enroling.get_student!(lesson.student_id),
+          teacher: Noctua.Teaching.get_teacher!(lesson.teacher_id)
+      }
+
       assert Timetabling.get_lesson_with_users!(lesson.id) == lesson
     end
 
     test "create_lesson/1 with valid data creates a lesson" do
       student = student_fixture()
       teacher = teacher_fixture()
+
       valid_attrs = %{
         ended_at: ~N[2021-09-06 12:37:00],
         note: "some note",

@@ -20,6 +20,7 @@ defmodule Noctua.Timetabling do
   def list_lessons do
     Lesson
     |> Repo.all()
+
     # |> Repo.preload(:student)
     # |> Repo.preload(:teacher)
 
@@ -98,6 +99,7 @@ defmodule Noctua.Timetabling do
   def get_lesson!(id) do
     Lesson
     |> Repo.get!(id)
+
     # |> Repo.preload(:student)
     # |> Repo.preload(:teacher)
   end

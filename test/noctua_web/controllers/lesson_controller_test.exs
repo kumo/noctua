@@ -98,11 +98,13 @@ defmodule NoctuaWeb.LessonControllerTest do
 
   defp create_lesson(_) do
     lesson_fixture = lesson_fixture()
+
     lesson = %{
       lesson_fixture
       | student: Noctua.Enroling.get_student!(lesson_fixture.student_id),
         teacher: Noctua.Teaching.get_teacher!(lesson_fixture.teacher_id)
     }
+
     %{lesson: lesson}
   end
 end

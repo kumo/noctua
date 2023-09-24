@@ -44,6 +44,7 @@ defmodule Noctua.Teaching do
   def get_teacher!(id) do
     Teacher
     |> Repo.get!(id)
+
     # |> Repo.preload(:user)
   end
 
