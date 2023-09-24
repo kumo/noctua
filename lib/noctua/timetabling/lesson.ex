@@ -109,7 +109,8 @@ defmodule Noctua.Timetabling.Lesson do
           {:ok, date} ->
             changeset
             |> put_change(:started_at, date)
-            |> put_change(:ended_at, Timex.shift(date, hours: 1))
+            # FIXME: remove truncate when Timex updates
+            |> put_change(:ended_at, NaiveDateTime.truncate(Timex.shift(date, hours: 1), :second))
 
           {:error, _} ->
             add_error(changeset, :date, "Invalid Date")
