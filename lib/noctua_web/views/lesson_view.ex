@@ -102,6 +102,13 @@ defmodule NoctuaWeb.LessonView do
     )
   end
 
+  def fake_subject_select(f, _changeset, _user) do
+    select(f, :time, [Scienze: 0, Matematica: 1, Inglese: 2, Storia: 3],
+      class:
+        "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+    )
+  end
+
   def title("show.html", assigns) do
     assigns.lesson.student.first_name <> " " <> assigns.lesson.student.last_name
   end

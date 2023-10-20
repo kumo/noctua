@@ -55,18 +55,46 @@
         <div class="shadow sm:rounded-md sm:overflow-hidden">
           <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
 
+            <div class="grid grid-cols-6 gap-6 border-b border-gray-900/10 pb-12">
 
-
-            <div class="grid grid-cols-6 gap-6">
-
-              <div class="col-span-6 sm:col-span-3">
+              <div class="col-span-6 sm:col-span-2">
                 <%= label f, :date, "Data", class: "block text-sm font-medium text-gray-700" %>
                 <%= simple_date_select(f, @changeset) %>
               </div>
 
-              <div class="col-span-6 sm:col-span-3">
+              <div class="col-span-6 sm:col-span-2">
                 <%= label f, :time, "Ora", class: "block text-sm font-medium text-gray-700" %>
                 <%= simple_time_select(f, @changeset) %>
+              </div>
+
+              <div class="col-span-6 sm:col-span-2">
+                <%= label f, :online, "Lezione in DAD", class: "block text-sm font-medium text-gray-700" %>
+                <%= checkbox f, :online, class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" %>
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <%= label f, :teacher_id, "Materia", class: "block text-sm font-medium text-gray-700" %>
+                <%= fake_subject_select f, @changeset, @current_user %>
+                <%= error_tag f, :teacher_id %>
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <%= label f, :teacher_id, "Docente", class: "block text-sm font-medium text-gray-700" %>
+                <%= teacher_select f, @changeset, @current_user %>
+                <%= error_tag f, :teacher_id %>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-6 gap-6 border-b border-gray-900/10 pb-12">
+              <div class="col-span-6 sm:col-span-3">
+                <%= label f, :student_id, "Studente", class: "block text-sm font-medium text-gray-700" %>
+                <%= student_select f, @changeset %>
+                <%= error_tag f, :student_id %>
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <%= label f, :note, "Nota", class: "block text-sm font-medium text-gray-700" %>
+                <%= text_input f, :note, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" %>
               </div>
 
               <div class="col-span-6 sm:col-span-2">
@@ -84,17 +112,6 @@
                 <%= checkbox f, :absent, class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" %>
               </div>
 
-              <div class="col-span-6 sm:col-span-3">
-                <%= label f, :student_id, "Studente", class: "block text-sm font-medium text-gray-700" %>
-                <%= student_select f, @changeset %>
-                <%= error_tag f, :student_id %>
-              </div>
-
-              <div class="col-span-6 sm:col-span-3">
-                <%= label f, :teacher_id, "Docente", class: "block text-sm font-medium text-gray-700" %>
-                <%= teacher_select f, @changeset, @current_user %>
-                <%= error_tag f, :teacher_id %>
-              </div>
             
             </div>
 
