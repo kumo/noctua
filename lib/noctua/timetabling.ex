@@ -7,6 +7,7 @@ defmodule Noctua.Timetabling do
   alias Noctua.Repo
 
   alias Noctua.Timetabling.Lesson
+  alias Noctua.Timetabling.Classroom
 
   @doc """
   Returns the list of lessons.
@@ -64,6 +65,16 @@ defmodule Noctua.Timetabling do
     |> Repo.preload(:teacher)
   end
 
+  def list_this_month_absent_lessons do
+    Lesson
+    |> Lesson.ordered()
+    |> Lesson.this_month()
+    |> where([l], l.absent == true)
+    |> Repo.all()
+    |> Repo.preload(:student)
+    |> Repo.preload(:teacher)
+  end
+
   def list_this_month_lessons(%Noctua.Teaching.Teacher{} = teacher) do
     Lesson
     |> Lesson.ordered()
@@ -78,6 +89,16 @@ defmodule Noctua.Timetabling do
     |> Lesson.ordered()
     |> Lesson.this_month()
     |> where([l], l.student_id == ^student.id)
+    |> Repo.all()
+    |> Repo.preload(:teacher)
+  end
+
+  def list_this_month_absent_lessons(%Noctua.Enroling.Student{} = student) do
+    Lesson
+    |> Lesson.ordered()
+    |> Lesson.this_month()
+    |> where([l], l.student_id == ^student.id)
+    |> where([l], l.absent == true or l.late_minutes > 0 or l.left_early_minutes > 0)
     |> Repo.all()
     |> Repo.preload(:teacher)
   end
@@ -174,5 +195,189 @@ defmodule Noctua.Timetabling do
   """
   def change_lesson(%Lesson{} = lesson, attrs \\ %{}) do
     Lesson.changeset(lesson, attrs)
+  end
+
+  @doc """
+  Returns the list of classrooms.
+
+  ## Examples
+
+      iex> list_classrooms()
+      [%Classroom{}, ...]
+
+  """
+  def list_classrooms do
+    Classroom
+    |> Repo.all()
+
+    # |> Repo.preload(:student)
+    # |> Repo.preload(:teacher)
+
+    # Repo.all(Classroom), preload: [:student, :teacher])
+  end
+
+  def list_ordered_classrooms do
+    Classroom
+    |> Classroom.reverse_ordered()
+    |> Repo.all()
+    |> Repo.preload(:teacher)
+
+    # Repo.all(Classroom), preload: [:student, :teacher])
+  end
+
+  def list_today_classrooms do
+    Classroom
+    |> Classroom.ordered()
+    |> Classroom.today()
+    |> Repo.all()
+    |> Repo.preload(:teacher)
+  end
+
+  # def list_today_teachers do
+  #   Classroom
+  #   |> Classroom.ordered()
+  #   |> Classroom.today()
+  #   |> Repo.all()
+  #   |> Repo.preload(:student)
+  #   |> Repo.preload(:teacher)
+  # end
+
+  def list_this_month_classrooms do
+    Classroom
+    |> Classroom.ordered()
+    |> Classroom.this_month()
+    |> Repo.all()
+    |> Repo.preload(:teacher)
+  end
+
+  def list_this_month_absent_classrooms do
+    Classroom
+    |> Classroom.ordered()
+    |> Classroom.this_month()
+    |> where([l], l.absent == true)
+    |> Repo.all()
+    |> Repo.preload(:teacher)
+  end
+
+  def list_this_month_classrooms(%Noctua.Teaching.Teacher{} = teacher) do
+    Classroom
+    |> Classroom.ordered()
+    |> Classroom.this_month()
+    |> where([l], l.teacher_id == ^teacher.id)
+    |> Repo.all()
+    |> Repo.preload(:student)
+  end
+
+  def list_this_month_classrooms(%Noctua.Enroling.Student{} = student) do
+    Classroom
+    |> Classroom.ordered()
+    |> Classroom.this_month()
+    |> where([l], l.student_id == ^student.id)
+    |> Repo.all()
+    |> Repo.preload(:teacher)
+  end
+
+  def list_this_month_absent_classrooms(%Noctua.Enroling.Student{} = student) do
+    Classroom
+    |> Classroom.ordered()
+    |> Classroom.this_month()
+    |> where([l], l.student_id == ^student.id)
+    |> where([l], l.absent == true or l.late_minutes > 0 or l.left_early_minutes > 0)
+    |> Repo.all()
+    |> Repo.preload(:teacher)
+  end
+
+  @doc """
+  Gets a single classroom.
+
+  Raises `Ecto.NoResultsError` if the Classroom does not exist.
+
+  ## Examples
+
+      iex> get_classroom!(123)
+      %Classroom{}
+
+      iex> get_classroom!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_classroom!(id) do
+    Classroom
+    |> Repo.get!(id)
+
+    # |> Repo.preload(:student)
+    # |> Repo.preload(:teacher)
+  end
+
+  def get_classroom_with_users!(id) do
+    Classroom
+    |> Repo.get!(id)
+    |> Repo.preload(:student)
+    |> Repo.preload(:teacher)
+  end
+
+  @doc """
+  Creates a classroom.
+
+  ## Examples
+
+      iex> create_classroom(%{field: value})
+      {:ok, %Classroom{}}
+
+      iex> create_classroom(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_classroom(attrs \\ %{}) do
+    %Classroom{teacher_id: 1}
+    |> Classroom.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a classroom.
+
+  ## Examples
+
+      iex> update_classroom(classroom, %{field: new_value})
+      {:ok, %Classroom{}}
+
+      iex> update_classroom(classroom, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_classroom(%Classroom{} = classroom, attrs) do
+    classroom
+    |> Classroom.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a classroom.
+
+  ## Examples
+
+      iex> delete_classroom(classroom)
+      {:ok, %Classroom{}}
+
+      iex> delete_classroom(classroom)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_classroom(%Classroom{} = classroom) do
+    Repo.delete(classroom)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking classroom changes.
+
+  ## Examples
+
+      iex> change_classroom(classroom)
+      %Ecto.Changeset{data: %Classroom{}}
+
+  """
+  def change_classroom(%Classroom{} = classroom, attrs \\ %{}) do
+    Classroom.changeset(classroom, attrs)
   end
 end

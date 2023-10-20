@@ -1,0 +1,48 @@
+<h1>Show Lesson</h1>
+
+<ul>
+
+  <li>
+    <strong>Student:</strong>
+    <%= @lesson.student.first_name %>
+  </li>
+
+  <li>
+    <strong>Teacher:</strong>
+    <%= @lesson.teacher.first_name %>
+  </li>
+
+  <li>
+    <strong>Iniziata:</strong>
+    <%= @lesson.started_at %>
+  </li>
+
+  <li>
+    <strong>Finita:</strong>
+    <%= @lesson.ended_at %>
+  </li>
+
+  <li>
+    <strong>Ritardo:</strong>
+    <%= @lesson.late_minutes %>
+  </li>
+
+  <li>
+    <strong>Left early:</strong>
+    <%= @lesson.left_early_minutes %>
+  </li>
+
+  <li>
+    <strong>Absent:</strong>
+    <%= @lesson.absent %>
+  </li>
+
+  <li>
+    <strong>Note:</strong>
+    <%= @lesson.note %>
+  </li>
+
+</ul>
+
+<span><%= link "Modifica", to: Routes.lesson_path(@conn, :edit, @lesson) %></span> |
+<span><%= link "Back", to: Routes.lesson_path(@conn, :index) %></span>

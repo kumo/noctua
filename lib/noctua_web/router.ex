@@ -59,6 +59,7 @@ defmodule NoctuaWeb.Router do
     resources "/teachers", TeacherController
     resources "/students", StudentController
     resources "/lessons", LessonController
+    resources "/classrooms", ClassroomController
     resources "/users", UserController
   end
 
