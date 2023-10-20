@@ -11,6 +11,7 @@ defmodule Noctua.Timetabling.Lesson do
     field :late_minutes, :integer
     field :left_early_minutes, :integer
     field :absent, :boolean
+    field :online, :boolean
     field :date, :string, virtual: true
     field :time, :string, virtual: true
     belongs_to :teacher, Noctua.Teaching.Teacher
@@ -32,7 +33,8 @@ defmodule Noctua.Timetabling.Lesson do
       :time,
       :late_minutes,
       :left_early_minutes,
-      :absent
+      :absent,
+      :online
     ])
     |> timey_wimey()
     |> validate_required([:started_at, :ended_at, :student_id, :teacher_id])
