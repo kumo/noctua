@@ -28,6 +28,8 @@ defmodule NoctuaWeb.ConnCase do
 
       # The default endpoint for testing
       @endpoint NoctuaWeb.Endpoint
+
+      use NoctuaWeb, :verified_routes
     end
   end
 
