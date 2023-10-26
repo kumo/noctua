@@ -17,6 +17,8 @@ defmodule NoctuaWeb do
   and import those modules here.
   """
 
+  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
+
   def controller do
     quote do
       use Phoenix.Controller, namespace: NoctuaWeb
@@ -94,7 +96,23 @@ defmodule NoctuaWeb do
       import NoctuaWeb.SharedViewHelpers
 
       use Phoenix.Component
+      import NoctuaWeb.CoreComponents
       import Phoenix.HTML.Form
+
+      # Shortcut for generating JS commands
+      alias Phoenix.LiveView.JS
+
+      # Routes generation with the ~p sigil
+      unquote(verified_routes())
+    end
+  end
+
+  def verified_routes do
+    quote do
+      use Phoenix.VerifiedRoutes,
+        endpoint: NoctuaWeb.Endpoint,
+        router: NoctuaWeb.Router,
+        statics: NoctuaWeb.static_paths()
     end
   end
 

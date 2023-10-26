@@ -27,4 +27,18 @@ defmodule Noctua.TimetablingFixtures do
 
     lesson
   end
+
+  @doc """
+  Generate a subject.
+  """
+  def subject_fixture(attrs \\ %{}) do
+    {:ok, subject} =
+      attrs
+      |> Enum.into(%{
+        name: "some name"
+      })
+      |> Noctua.Timetabling.create_subject()
+
+    subject
+  end
 end

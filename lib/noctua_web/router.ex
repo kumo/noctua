@@ -61,6 +61,11 @@ defmodule NoctuaWeb.Router do
     resources "/lessons", LessonController
     resources "/classrooms", ClassroomController
     resources "/users", UserController
+
+    live "/subjects", SubjectLive.Index, :index
+    live "/subjects/new", SubjectLive.Index, :new
+    live "/subjects/:id/edit", SubjectLive.Index, :edit
+
   end
 
   # Other scopes may use custom stacks.
