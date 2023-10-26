@@ -47,9 +47,9 @@ defmodule NoctuaWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {NoctuaWeb.LayoutView, "live.html"}
+        layout: {NoctuaWeb.Layouts, :app}
 
-      unquote(view_helpers())
+      unquote(html_helpers())
     end
   end
 
@@ -75,6 +75,35 @@ defmodule NoctuaWeb do
     quote do
       use Phoenix.Channel
       import NoctuaWeb.Gettext
+    end
+  end
+
+  def html do
+    quote do
+      use Phoenix.Component
+
+      # Import convenience functions from controllers
+      import Phoenix.Controller,
+        only: [get_csrf_token: 0, view_module: 1, view_template: 1]
+
+      # Include general helpers for rendering HTML
+      unquote(html_helpers())
+    end
+  end
+
+  defp html_helpers do
+    quote do
+      # HTML escaping functionality
+      import Phoenix.HTML
+      # Core UI components and translation
+      import NoctuaWeb.CoreComponents
+      import NoctuaWeb.Gettext
+
+      # Shortcut for generating JS commands
+      alias Phoenix.LiveView.JS
+
+      # Routes generation with the ~p sigil
+      unquote(verified_routes())
     end
   end
 
