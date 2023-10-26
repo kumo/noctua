@@ -1,5 +1,5 @@
 defmodule NoctuaWeb.LessonControllerTest do
-  use NoctuaWeb.ConnCase
+  use NoctuaWeb.ConnCase, async: true
 
   import Noctua.TimetablingFixtures
   import Noctua.EnrolingFixtures

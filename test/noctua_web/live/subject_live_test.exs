@@ -1,5 +1,5 @@
 defmodule NoctuaWeb.SubjectLiveTest do
-  use NoctuaWeb.ConnCase
+  use NoctuaWeb.ConnCase, async: true
 
   import Phoenix.LiveViewTest
   import Noctua.TimetablingFixtures
