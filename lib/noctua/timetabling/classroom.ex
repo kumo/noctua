@@ -15,6 +15,7 @@ defmodule Noctua.Timetabling.Classroom do
     field :date, :string, virtual: true
     field :time, :string, virtual: true
     belongs_to :teacher, Noctua.Teaching.Teacher
+    belongs_to :subject, Noctua.Teaching.Subject
     # belongs_to :student, Noctua.Enroling.Student
 
     timestamps()
@@ -26,9 +27,10 @@ defmodule Noctua.Timetabling.Classroom do
     |> cast(attrs, [
       :started_at,
       :ended_at,
-      :note,
+      # :note,
       # :student_id,
       :teacher_id,
+      :subject_id,
       :date,
       :time,
       # :late_minutes,
@@ -37,7 +39,7 @@ defmodule Noctua.Timetabling.Classroom do
       :online
     ])
     |> timey_wimey()
-    |> validate_required([:started_at, :ended_at, :teacher_id])
+    |> validate_required([:started_at, :ended_at, :teacher_id, :subject_id])
   end
 
   def ordered(query) do

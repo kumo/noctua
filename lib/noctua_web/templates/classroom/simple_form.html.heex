@@ -73,9 +73,9 @@
               </div>
 
               <div class="col-span-6 sm:col-span-3">
-                <%= label f, :teacher_id, "Materia", class: "block text-sm font-medium text-gray-700" %>
-                <%= fake_subject_select f, @changeset, @current_user %>
-                <%= error_tag f, :teacher_id %>
+                <%= label f, :subject_id, "Materia", class: "block text-sm font-medium text-gray-700" %>
+                <%= subject_select f, @changeset %>
+                <%= error_tag f, :subject_id %>
               </div>
 
               <div class="col-span-6 sm:col-span-3">
