@@ -48,6 +48,14 @@ defmodule Noctua.Enroling do
     # |> Repo.preload(:lessons)
   end
 
+  def get_students(ids) do
+    query = from s in Student, where: s.id in ^ids
+
+    students = Repo.all(query)
+    students
+  end
+
+
   @doc """
   Creates a student.
 

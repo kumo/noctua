@@ -15,8 +15,18 @@ defmodule Noctua.Timetabling.Classroom do
     field :date, :string, virtual: true
     field :time, :string, virtual: true
     belongs_to :teacher, Noctua.Teaching.Teacher
-    belongs_to :subject, Noctua.Teaching.Subject
+    belongs_to :subject, Noctua.Timetabling.Subject
     # belongs_to :student, Noctua.Enroling.Student
+
+    many_to_many :students, Noctua.Enroling.Student,
+      join_through: Noctua.Timetabling.Absence,
+      on_delete: :delete_all,
+      on_replace: :delete
+
+    # has_many :preferences, Preference, on_replace: :delete
+    # has_many :cats, :through => :preferences
+
+    field(:student_list, {:array, :string}, virtual: true, default: [])
 
     timestamps()
   end
@@ -38,9 +48,28 @@ defmodule Noctua.Timetabling.Classroom do
       # :absent,
       :online
     ])
+    |> put_assoc(:students, fetch_students(attrs))
     |> timey_wimey()
     |> validate_required([:started_at, :ended_at, :teacher_id, :subject_id])
   end
+
+    defp fetch_students(%{student_list: ids}),
+    do: fetch_students(%{"student_list" => ids})
+
+  defp fetch_students(%{"student_list" => students_ids}) do
+    # Logger.error("fetch students")
+
+    students =
+      students_ids
+      |> Enum.reject(&(&1 == ""))
+      |> Noctua.Enroling.get_students()
+
+    # Logger.error(dbg(students))
+    students
+  end
+
+  defp fetch_students(_), do: []
+
 
   def ordered(query) do
     from c in query, order_by: c.started_at

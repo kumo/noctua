@@ -1,48 +1,31 @@
-<h1>Show Lesson</h1>
+<h1>Show classroom</h1>
 
 <ul>
 
+<%= for student <- @classroom.students  do %>
   <li>
     <strong>Student:</strong>
-    <%= @lesson.student.first_name %>
+    <%= student.last_name %>
+    <%= student.first_name %>
   </li>
+  <% end %>
 
   <li>
     <strong>Teacher:</strong>
-    <%= @lesson.teacher.first_name %>
+    <%= @classroom.teacher.first_name %>
   </li>
 
   <li>
     <strong>Iniziata:</strong>
-    <%= @lesson.started_at %>
+    <%= @classroom.started_at %>
   </li>
 
   <li>
     <strong>Finita:</strong>
-    <%= @lesson.ended_at %>
-  </li>
-
-  <li>
-    <strong>Ritardo:</strong>
-    <%= @lesson.late_minutes %>
-  </li>
-
-  <li>
-    <strong>Left early:</strong>
-    <%= @lesson.left_early_minutes %>
-  </li>
-
-  <li>
-    <strong>Absent:</strong>
-    <%= @lesson.absent %>
-  </li>
-
-  <li>
-    <strong>Note:</strong>
-    <%= @lesson.note %>
+    <%= @classroom.ended_at %>
   </li>
 
 </ul>
 
-<span><%= link "Modifica", to: Routes.lesson_path(@conn, :edit, @lesson) %></span> |
-<span><%= link "Back", to: Routes.lesson_path(@conn, :index) %></span>
+<span><%= link "Modifica", to: Routes.classroom_path(@conn, :edit, @classroom) %></span> |
+<span><%= link "Back", to: Routes.classroom_path(@conn, :index) %></span>

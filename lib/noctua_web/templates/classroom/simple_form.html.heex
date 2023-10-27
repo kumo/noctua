@@ -88,15 +88,11 @@
             <div class="grid grid-cols-6 gap-2 border-b border-gray-900/10 pb-12">
             <h2 class="text-base font-semibold leading-7 text-gray-900 col-span-6">Studenti</h2>
 
-            <%= for student <- Noctua.Enroling.list_alphabetical_students() do %>
-
-              <div class="col-span-6 sm:col-span-6">
-                <input id="candidates" aria-describedby="candidates-description" name="candidates" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                <label for="candidates" class="font-medium text-gray-700"><%= student.last_name %></label>
-                <span id="candidates-description" class="text-gray-500"><%= student.first_name %></span>
-              </div>
-
-            <% end %>
+        <.checkgroup
+          field={f[:student_list]}
+          label="Studenti"
+          options={Noctua.Enroling.list_students() |> Enum.map(&{"#{&1.last_name} #{&1.first_name}", "#{&1.id}"})}
+        />
 
             </div>
 

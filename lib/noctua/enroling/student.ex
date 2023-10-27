@@ -19,6 +19,12 @@ defmodule Noctua.Enroling.Student do
     field :lesson_count, :integer, virtual: true
     field :absence_count, :integer, virtual: true
 
+    many_to_many :absences, Noctua.Timetabling.Classroom,
+      join_through: Noctua.Timetabling.Absence,
+      on_delete: :delete_all,
+      on_replace: :delete
+    
+
     timestamps()
   end
 

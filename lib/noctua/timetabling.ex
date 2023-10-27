@@ -209,6 +209,9 @@ defmodule Noctua.Timetabling do
   def list_classrooms do
     Classroom
     |> Repo.all()
+    |> Repo.preload(:subject)
+    |> Repo.preload(:students)
+    |> Repo.preload(:teacher)
 
     # |> Repo.preload(:student)
     # |> Repo.preload(:teacher)
@@ -221,6 +224,8 @@ defmodule Noctua.Timetabling do
     |> Classroom.reverse_ordered()
     |> Repo.all()
     |> Repo.preload(:teacher)
+    |> Repo.preload(:subject)
+    |> Repo.preload(:students)
 
     # Repo.all(Classroom), preload: [:student, :teacher])
   end
@@ -304,15 +309,28 @@ defmodule Noctua.Timetabling do
   def get_classroom!(id) do
     Classroom
     |> Repo.get!(id)
+    |> Repo.preload(:subject)
+    |> Repo.preload(:teacher)
+    |> Repo.preload(:students)
+    |> with_student_list()
 
     # |> Repo.preload(:student)
     # |> Repo.preload(:teacher)
   end
 
+  def with_student_list(classroom) do
+    students =
+      classroom.students
+      |> Enum.map(&"#{&1.id}")
+
+    %Classroom{classroom | student_list: students}
+  end
+
+
   def get_classroom_with_users!(id) do
     Classroom
     |> Repo.get!(id)
-    |> Repo.preload(:student)
+    |> Repo.preload(:students)
     |> Repo.preload(:teacher)
   end
 

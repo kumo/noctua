@@ -23,13 +23,13 @@
                 Quando
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Studente
+                Materia
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Docente
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Note
+                Assenze
               </th>
               <th scope="col" class="relative px-6 py-3">
                 <span class="sr-only">Edit</span>
@@ -45,13 +45,13 @@
                 <%= Timex.format!(classroom.started_at, "{D}/{M}/{YYYY}") %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <%= raw full_name_emphasised(classroom.student) %>
+              <%= classroom.subject.name %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 <%= raw full_name_emphasised(classroom.teacher) %>
               </td>
               <td class="px-6 py-4 text-sm text-gray-500">
-                <%= classroom.note %>
+                <%= length(classroom.students) %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <span><%= link "Modifica", to: Routes.classroom_path(@conn, :edit, classroom), class: "text-indigo-600 hover:text-indigo-900" %></span>
