@@ -86,12 +86,11 @@
             </div>
 
             <div class="grid grid-cols-6 gap-2 border-b border-gray-900/10 pb-12">
-            <h2 class="text-base font-semibold leading-7 text-gray-900 col-span-6">Studenti</h2>
 
         <.checkgroup
           field={f[:student_list]}
           label="Studenti"
-          options={Noctua.Enroling.list_students() |> Enum.map(&{"#{&1.last_name} #{&1.first_name}", "#{&1.id}"})}
+          options={Noctua.Enroling.list_alphabetical_students() |> Enum.map(&{"#{&1.last_name} #{&1.first_name}", "#{&1.id}"})}
         />
 
             </div>
