@@ -274,22 +274,24 @@ defmodule Noctua.Timetabling do
   end
 
   def list_this_month_classrooms(%Noctua.Enroling.Student{} = student) do
-    Classroom
-    |> Classroom.ordered()
-    |> Classroom.this_month()
-    |> where([l], l.student_id == ^student.id)
-    |> Repo.all()
-    |> Repo.preload(:teacher)
+    Repo.all(
+      from c in Classroom,
+        join: s in assoc(c, :students),
+        where: s.id == ^student.id,
+        preload: [students: s],
+        preload: [:subject]
+    )
   end
 
   def list_this_month_absent_classrooms(%Noctua.Enroling.Student{} = student) do
     Classroom
     |> Classroom.ordered()
     |> Classroom.this_month()
-    |> where([l], l.student_id == ^student.id)
-    |> where([l], l.absent == true or l.late_minutes > 0 or l.left_early_minutes > 0)
+    |> where([c], c.student_id == ^student.id)
+    # |> where([l], l.absent == true or l.late_minutes > 0 or l.left_early_minutes > 0)
     |> Repo.all()
     |> Repo.preload(:teacher)
+    |> Repo.preload(:absences)
   end
 
   @doc """
@@ -325,7 +327,6 @@ defmodule Noctua.Timetabling do
 
     %Classroom{classroom | student_list: students}
   end
-
 
   def get_classroom_with_users!(id) do
     Classroom
