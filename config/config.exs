@@ -12,7 +12,7 @@ config :noctua,
 
 # Configures the endpoint
 config :noctua, NoctuaWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "https://noctua.gigalixirapp.com"],
   render_errors: [
     formats: [html: NoctuaWeb.ErrorHTML, json: NoctuaWeb.ErrorJSON],
     layout: false
