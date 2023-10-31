@@ -67,6 +67,7 @@ defmodule Noctua.Reporting do
     Student
     |> all_stats(partial_query)
     |> Student.alphabetical()
+    |> where([s], is_nil(s.archived) or s.archived != true)
     |> Repo.all()
   end
 

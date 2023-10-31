@@ -109,6 +109,22 @@ defmodule Noctua.Enroling do
   end
 
   @doc """
+  Archives a student.
+
+  ## Examples
+
+      iex> archive_student(student)
+      {:ok, %Student{}}
+
+      iex> archive_student(student)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def archive_student(%Student{} = student) do
+    update_student(student, %{archived: true})
+  end
+
+  @doc """
   Returns an `%Ecto.Changeset{}` for tracking student changes.
 
   ## Examples

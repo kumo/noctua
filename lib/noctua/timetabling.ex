@@ -29,13 +29,14 @@ defmodule Noctua.Timetabling do
   end
 
   def list_ordered_lessons do
-    Lesson
-    |> Lesson.reverse_ordered()
-    |> Repo.all()
-    |> Repo.preload(:student)
-    |> Repo.preload(:teacher)
+    query =
+      from l in Lesson,
+        order_by: [desc: l.started_at],
+        join: s in assoc(l, :student),
+        where: is_nil(s.archived) or s.archived != true,
+        preload: [:student, :teacher]
 
-    # Repo.all(Lesson), preload: [:student, :teacher])
+    Repo.all(query)
   end
 
   def list_today_lessons do

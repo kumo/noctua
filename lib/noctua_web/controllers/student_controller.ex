@@ -62,4 +62,14 @@ defmodule NoctuaWeb.StudentController do
     |> put_flash(:info, "Student deleted successfully.")
     |> redirect(to: Routes.student_path(conn, :index))
   end
+
+  def archive(conn, %{"id" => id}) do
+    student = Enroling.get_student!(id)
+    {:ok, _student} = Enroling.archive_student(student)
+
+    conn
+    |> put_flash(:info, "Student archived successfully.")
+    |> redirect(to: Routes.student_path(conn, :index))
+  end
+  
 end
