@@ -24,6 +24,7 @@ defmodule Noctua.Teaching do
   def list_alphabetical_teachers do
     Teacher
     |> Teacher.alphabetical()
+    |> Teacher.active()
     |> Repo.all()
   end
 

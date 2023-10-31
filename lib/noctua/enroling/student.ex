@@ -41,4 +41,8 @@ defmodule Noctua.Enroling.Student do
     from c in query, order_by: c.last_name
   end
 
+  def active(query) do
+    from s in query,
+      where: is_nil(s.archived) or s.archived != true
+  end
 end

@@ -24,6 +24,7 @@ defmodule Noctua.Enroling do
   def list_alphabetical_students do
     Student
     |> Student.alphabetical()
+    |> Student.active()
     |> Repo.all()
   end
 

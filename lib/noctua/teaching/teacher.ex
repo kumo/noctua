@@ -37,4 +37,9 @@ defmodule Noctua.Teaching.Teacher do
   def alphabetical(query) do
     from c in query, order_by: c.last_name
   end
+
+  def active(query) do
+    from t in query,
+      where: is_nil(t.archived) or t.archived != true
+  end
 end
