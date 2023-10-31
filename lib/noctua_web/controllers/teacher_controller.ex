@@ -61,4 +61,14 @@ defmodule NoctuaWeb.TeacherController do
     |> put_flash(:info, "Teacher deleted successfully.")
     |> redirect(to: Routes.teacher_path(conn, :index))
   end
+
+  def archive(conn, %{"id" => id}) do
+    teacher = Teaching.get_teacher!(id)
+    {:ok, _teacher} = Teaching.archive_teacher(teacher)
+
+    conn
+    |> put_flash(:info, "teacher archived successfully.")
+    |> redirect(to: Routes.teacher_path(conn, :index))
+  end
+
 end

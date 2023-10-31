@@ -33,7 +33,9 @@ defmodule Noctua.Timetabling do
       from l in Lesson,
         order_by: [desc: l.started_at],
         join: s in assoc(l, :student),
+        join: t in assoc(l, :teacher),
         where: is_nil(s.archived) or s.archived != true,
+        where: is_nil(t.archived) or t.archived != true,
         preload: [:student, :teacher]
 
     Repo.all(query)

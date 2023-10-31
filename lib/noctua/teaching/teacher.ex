@@ -9,6 +9,8 @@ defmodule Noctua.Teaching.Teacher do
     field :first_name, :string
     field :last_name, :string
 
+    field :archived, :boolean, default: false
+
     has_many :lessons, Lesson
 
     field :today_count, :integer, virtual: true
@@ -28,7 +30,7 @@ defmodule Noctua.Teaching.Teacher do
   @doc false
   def changeset(teacher, attrs) do
     teacher
-    |> cast(attrs, [:first_name, :last_name])
+    |> cast(attrs, [:first_name, :last_name, :archived])
     |> validate_required([:first_name, :last_name])
   end
 

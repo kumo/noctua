@@ -108,6 +108,22 @@ defmodule Noctua.Teaching do
   end
 
   @doc """
+  Archives a teacher.
+
+  ## Examples
+
+      iex> archive_teacher(teacher)
+      {:ok, %Teacher{}}
+
+      iex> archive_teacher(teacher)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def archive_teacher(%Teacher{} = teacher) do
+    update_teacher(teacher, %{archived: true})
+  end
+
+  @doc """
   Returns an `%Ecto.Changeset{}` for tracking teacher changes.
 
   ## Examples

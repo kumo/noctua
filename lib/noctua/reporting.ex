@@ -78,6 +78,7 @@ defmodule Noctua.Reporting do
     Teacher
     |> all_combined_stats(partial_query)
     |> Teacher.alphabetical()
+    |> where([t], is_nil(t.archived) or t.archived != true)
     |> Repo.all()
   end
 
