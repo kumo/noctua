@@ -3,7 +3,7 @@ defmodule Noctua.Repo.Migrations.AddArchivedToStudents do
 
   def change do
     alter table(:students) do
-      add :archived, :bool
-   end
+      add :archived, :boolean
+    end
   end
 end
