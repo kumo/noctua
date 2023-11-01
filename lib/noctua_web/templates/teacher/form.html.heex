@@ -46,6 +46,12 @@
 
         <% end %>
 
+        <fieldset class="flex flex-col gap-2">
+          <.inputs_for :let={f_address} field={f[:address]}>
+            <.input field={f_address[:phone1]} type="text" label="Telefono" />
+          </.inputs_for>
+        </fieldset>
+
       </div>
 
     </div>

@@ -4,6 +4,7 @@ defmodule Noctua.Teaching.Teacher do
   import Ecto.Query
 
   alias Noctua.Timetabling.Lesson
+  alias Noctua.Teacher.Address
 
   schema "teachers" do
     field :first_name, :string
@@ -24,6 +25,8 @@ defmodule Noctua.Teaching.Teacher do
     belongs_to :user, Noctua.Accounts.User
     # field :user_id, :integer
 
+    embeds_one :address, Address
+
     timestamps()
   end
 
@@ -31,6 +34,7 @@ defmodule Noctua.Teaching.Teacher do
   def changeset(teacher, attrs) do
     teacher
     |> cast(attrs, [:first_name, :last_name, :archived])
+    |> cast_embed(:address)
     |> validate_required([:first_name, :last_name])
   end
 
