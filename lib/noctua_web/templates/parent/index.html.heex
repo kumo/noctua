@@ -22,6 +22,9 @@
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Nome
               </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Studenti
+              </th>
               <th scope="col" class="relative px-6 py-3">
                 <span class="sr-only">Edit</span>
               </th>
@@ -36,6 +39,16 @@
                 <%= link to: Routes.parent_path(@conn, :edit, parent), class: "text-indigo-600 hover:text-indigo-900" do %>
                 <span class="truncate"><%= parent.first_name %></span> 
                 <span class="font-medium"><%= parent.last_name %></span>
+                <% end %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <!-- show students separated by commas -->
+              <%= for student <- parent.students do %>
+                <span class="truncate"><%= student.first_name %></span> 
+                <span class="font-medium"><%= student.last_name %></span>
+                <%= if Enum.at(parent.students, -1) != student do %>
+                  ,
+                <% end %>
                 <% end %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
