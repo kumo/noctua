@@ -39,7 +39,17 @@ defmodule NoctuaWeb.ClassroomView do
   def simple_time_select(f, _changeset) do
     # Probably should be able to select no time, but that messes up the changeset code
     # times = Enum.to_list(8..17) |> Enum.map(fn x -> "#{x}:00" |> String.pad_leading(5, "0") end)
-    times = ["09:05": "09:05", "09:55": "09:55", "11:00": "11:00", "11:50": "11:50", "12:40": "12:40", "13:30": "13:30", "15:20": "15:20", "16:10": "16:10", "17:00": "17:00"];
+    times = [
+      "09:05": "09:05",
+      "09:55": "09:55",
+      "11:00": "11:00",
+      "11:50": "11:50",
+      "12:40": "12:40",
+      "13:30": "13:30",
+      "15:20": "15:20",
+      "16:10": "16:10",
+      "17:00": "17:00"
+    ]
 
     select(f, :time, times,
       class:

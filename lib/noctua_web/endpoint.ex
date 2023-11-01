@@ -10,7 +10,8 @@ defmodule NoctuaWeb.Endpoint do
     signing_salt: "R3lNIaCo"
   ]
 
-  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options], check_origin: false]
+  socket "/live", Phoenix.LiveView.Socket,
+    websocket: [connect_info: [session: @session_options], check_origin: false]
 
   # Serve at "/" the static files from "priv/static" directory.
   #

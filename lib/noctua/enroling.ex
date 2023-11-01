@@ -56,7 +56,6 @@ defmodule Noctua.Enroling do
     students
   end
 
-
   @doc """
   Creates a student.
 

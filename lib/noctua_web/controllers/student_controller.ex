@@ -71,5 +71,4 @@ defmodule NoctuaWeb.StudentController do
     |> put_flash(:info, "Student archived successfully.")
     |> redirect(to: Routes.student_path(conn, :index))
   end
-  
 end

@@ -70,5 +70,4 @@ defmodule NoctuaWeb.TeacherController do
     |> put_flash(:info, "teacher archived successfully.")
     |> redirect(to: Routes.teacher_path(conn, :index))
   end
-
 end

@@ -48,7 +48,7 @@ defmodule NoctuaWeb do
     quote do
       use Phoenix.LiveView,
         # layout: {NoctuaWeb.Layouts, :app}
-      layout: {NoctuaWeb.LayoutView, "live.html"}
+        layout: {NoctuaWeb.LayoutView, "live.html"}
 
       unquote(html_helpers())
     end

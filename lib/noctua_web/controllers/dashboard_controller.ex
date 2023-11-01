@@ -18,7 +18,7 @@ defmodule NoctuaWeb.DashboardController do
     student = Enroling.get_student!(1)
     # lessons = Noctua.Timetabling.list_this_month_absent_lessons(student)
     classrooms = Noctua.Timetabling.list_this_month_classrooms(student)
-      # lessons = Timetabling.list_today_lessons()
+    # lessons = Timetabling.list_today_lessons()
     # students = Reporting.list_students_today_stats()
     # teachers = Reporting.list_teachers_today_stats()
     render(conn, "parents.html", classrooms: classrooms, student: student)

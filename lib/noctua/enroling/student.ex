@@ -25,7 +25,6 @@ defmodule Noctua.Enroling.Student do
       join_through: Noctua.Timetabling.Absence,
       on_delete: :delete_all,
       on_replace: :delete
-    
 
     timestamps()
   end

@@ -25,7 +25,7 @@ defmodule NoctuaWeb.ClassroomController do
         |> redirect(to: Routes.classroom_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        Logger.error changeset
+        Logger.error(changeset)
         render(conn, "new.html", changeset: changeset)
     end
   end

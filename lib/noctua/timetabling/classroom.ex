@@ -53,7 +53,7 @@ defmodule Noctua.Timetabling.Classroom do
     |> validate_required([:started_at, :ended_at, :teacher_id, :subject_id])
   end
 
-    defp fetch_students(%{student_list: ids}),
+  defp fetch_students(%{student_list: ids}),
     do: fetch_students(%{"student_list" => ids})
 
   defp fetch_students(%{"student_list" => students_ids}) do
@@ -69,7 +69,6 @@ defmodule Noctua.Timetabling.Classroom do
   end
 
   defp fetch_students(_), do: []
-
 
   def ordered(query) do
     from c in query, order_by: c.started_at

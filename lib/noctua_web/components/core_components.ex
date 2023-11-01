@@ -415,7 +415,7 @@ defmodule NoctuaWeb.CoreComponents do
     """
   end
 
-    @doc """
+  @doc """
   Generate a checkbox group for multi-select.
   """
   attr :id, :any
@@ -439,7 +439,6 @@ defmodule NoctuaWeb.CoreComponents do
 
     input(new_assigns)
   end
-
 
   @doc """
   Renders a label.

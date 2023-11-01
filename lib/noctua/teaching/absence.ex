@@ -20,4 +20,3 @@ defmodule Noctua.Timetabling.Absence do
     |> validate_required([:student_id, :classroom_id])
   end
 end
-
