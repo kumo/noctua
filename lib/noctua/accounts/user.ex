@@ -14,6 +14,7 @@ defmodule Noctua.Accounts.User do
     field :role, Ecto.Enum, values: [:Admin, :Secretary, :Teacher, :Student, :Parent, :Guest]
 
     has_one :teacher, Noctua.Teaching.Teacher
+    has_one :parent, Noctua.Parenting.Parent
 
     timestamps()
   end
@@ -71,6 +72,15 @@ defmodule Noctua.Accounts.User do
     user
     |> cast(attrs, [:email, :password])
     |> put_change(:role, :Teacher)
+    |> validate_email()
+    |> validate_password(opts)
+  end
+
+  def changeset_for_parent(user, attrs, opts \\ []) do
+    user
+    |> cast(attrs, [:email, :password, :magic_token])
+    |> validate_required([:magic_token])
+    |> put_change(:role, :Parent)
     |> validate_email()
     |> validate_password(opts)
   end

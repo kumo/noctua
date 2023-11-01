@@ -24,12 +24,18 @@
 
             <%= link "Docenti", to: Routes.teacher_path(@conn, :index), class: "px-3 py-2 text-gray-900 text-sm font-medium" %>
 
+            <%= link "Genitori", to: Routes.parent_path(@conn, :index), class: "px-3 py-2 text-gray-900 text-sm font-medium" %>
+
             <%= link "Materie", to: Routes.subject_index_path(@conn, :index), class: "px-3 py-2 text-gray-900 text-sm font-medium" %>
             <% end %>
+
+            <%= if @current_user.role != :Parent do %>
 
             <%= link "Registri", to: Routes.lesson_path(@conn, :index), class: "px-3 py-2 text-gray-900 text-sm font-medium" %>
 
             <%= link "Assenze", to: Routes.classroom_path(@conn, :index), class: "px-3 py-2 text-gray-900 text-sm font-medium" %>
+
+            <% end %>
           </nav>
         </div>
         <div class="flex items-center lg:hidden">
@@ -126,7 +132,7 @@
 
     <!-- breadcrumbs -->
 
-    <%= if assigns[:student] || assigns[:teacher] do %>
+    <%= if @current_user.role != :Parent && (assigns[:student] || assigns[:teacher]) do %>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="border-t border-gray-200 py-3">

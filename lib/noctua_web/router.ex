@@ -57,13 +57,15 @@ defmodule NoctuaWeb.Router do
     pipe_through [:browser, :require_authenticated_user]
 
     get "/", DashboardController, :index
-    get "/parents", DashboardController, :parents
+    # get "/parents", DashboardController, :parents
     get "/teachers/:id/archive", TeacherController, :archive
     resources "/teachers", TeacherController
     get "/students/:id/archive", StudentController, :archive
     resources "/students", StudentController
     resources "/lessons", LessonController
     resources "/classrooms", ClassroomController
+    get "/parents/:id/archive", ParentController, :archive
+    resources "/parents", ParentController
     resources "/users", UserController
 
     live "/subjects", SubjectLive.Index, :index

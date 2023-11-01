@@ -26,6 +26,12 @@ defmodule Noctua.Enroling.Student do
       on_delete: :delete_all,
       on_replace: :delete
 
+    many_to_many :parents, Noctua.Parenting.Parent,
+      join_through: Noctua.Parenting.Permission,
+      on_delete: :delete_all,
+      on_replace: :delete
+
+
     timestamps()
   end
 

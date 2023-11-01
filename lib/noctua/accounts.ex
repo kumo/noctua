@@ -368,6 +368,7 @@ defmodule Noctua.Accounts do
     User
     |> Repo.all()
     |> Repo.preload(:teacher)
+    |> Repo.preload(:parent)
   end
 
   # def list_alphabetical_users do
