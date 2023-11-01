@@ -2,6 +2,8 @@ defmodule Noctua.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  require Logger
+
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true, redact: true
@@ -37,13 +39,31 @@ defmodule Noctua.Accounts.User do
     |> cast(attrs, [:email, :password, :role])
     |> validate_email()
     |> validate_password(opts)
+
+    # only validate password if it is passed and it doesn't already exist in the user
   end
 
   def changeset(user, attrs, opts \\ []) do
     user
     |> cast(attrs, [:email, :password])
     |> validate_email()
-    |> validate_password(opts)
+    |> validate_password_if_present(opts)
+  end
+
+  def validate_password_if_present(changeset, opts) do
+    Logger.error(changeset)
+
+    case changeset do
+      %Ecto.Changeset{
+        valid?: true,
+        changes: %{password: _password}
+      } ->
+        changeset
+        |> validate_password(opts)
+
+      _ ->
+        changeset
+    end
   end
 
   def changeset_for_teacher(user, attrs, opts \\ []) do
