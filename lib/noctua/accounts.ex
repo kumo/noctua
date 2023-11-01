@@ -44,6 +44,13 @@ defmodule Noctua.Accounts do
     if User.valid_password?(user, password), do: user
   end
 
+  def get_user_by_token(token) when is_binary(token) do
+    User
+    |> where([u], u.magic_token == ^token)
+    |> Repo.one()
+  end
+
+  @spec get_user!(any()) :: any()
   @doc """
   Gets a single user.
 

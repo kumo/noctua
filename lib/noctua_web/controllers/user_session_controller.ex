@@ -24,4 +24,21 @@ defmodule NoctuaWeb.UserSessionController do
     |> put_flash(:info, "Logged out successfully.")
     |> UserAuth.log_out_user()
   end
+
+  # login with a magic token
+  def login(conn, %{"token" => token}) do
+    user = Accounts.get_user_by_token(token)
+
+  if user do
+    UserAuth.log_in_user(conn, user, %{})
+
+    conn
+    # |> put_session(:user_id, user.id)
+    # |> configure_session(renew: true)
+    |> redirect(to: "/")
+  else
+    # handle invalid token
+      render(conn, "new.html", error_message: "Invalid token")
+    end
+  end
 end
