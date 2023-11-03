@@ -47,7 +47,12 @@
                 <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
           <%= label fp, :magic_token, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
+          
+        <%= if assigns[:parent] != nil do %>
             <%= text_input fp, :magic_token, class: "max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md", required: true %>
+          <% else  %>
+            <%= text_input fp, :magic_token, value: UXID.generate!(size: :xsmall), class: "max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md", required: true %>
+          <% end  %>
             <%= error_tag fp, :magic_token %>
           </div>
         </div>
