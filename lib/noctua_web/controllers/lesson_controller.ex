@@ -8,7 +8,7 @@ defmodule NoctuaWeb.LessonController do
 
   def index(conn, _params) do
     lessons = if conn.assigns.current_user.role == :Teacher do
-      Timetabling.list_ordered_lessons_for_teacher_id(conn.assigns.current_user.id)
+      Timetabling.list_ordered_lessons_for_teacher_id(conn.assigns.current_user.teacher.id)
     else
       Timetabling.list_ordered_lessons()
     end
