@@ -247,6 +247,21 @@ defmodule Noctua.Timetabling do
     # Repo.all(Classroom), preload: [:student, :teacher])
   end
 
+  # list the ordered classrooms for the teacher id
+  def list_ordered_classrooms_for_teacher_id(teacher_id) do
+    query =
+      from c in Classroom,
+        order_by: [desc: c.started_at],
+        join: s in assoc(c, :students),
+        join: t in assoc(c, :teacher),
+        where: is_nil(s.archived) or s.archived != true,
+        where: is_nil(t.archived) or t.archived != true,
+        where: c.teacher_id == ^teacher_id,
+        preload: [:students, :teacher, :subject]
+
+    Repo.all(query)
+  end
+
   def list_today_classrooms do
     Classroom
     |> Classroom.ordered()
