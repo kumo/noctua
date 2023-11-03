@@ -7,7 +7,12 @@ defmodule NoctuaWeb.ClassroomController do
   require Logger
 
   def index(conn, _params) do
-    classrooms = Timetabling.list_ordered_classrooms()
+    classrooms = if conn.assigns.current_user.role == :Teacher do
+      Timetabling.list_ordered_classrooms_for_teacher_id(conn.assigns.current_user.teacher.id)
+    else
+      Timetabling.list_ordered_classrooms()
+    end
+
     render(conn, "index.html", classrooms: classrooms)
   end
 
