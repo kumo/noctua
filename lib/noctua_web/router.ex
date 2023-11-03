@@ -71,6 +71,8 @@ defmodule NoctuaWeb.Router do
     live "/subjects", SubjectLive.Index, :index
     live "/subjects/new", SubjectLive.Index, :new
     live "/subjects/:id/edit", SubjectLive.Index, :edit
+    live "/subjects/:id", SubjectLive.Show, :show
+    live "/subjects/:id/show/edit", SubjectLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
