@@ -45,14 +45,33 @@ defmodule Noctua.Teaching do
   def get_teacher!(id) do
     Teacher
     |> Repo.get!(id)
+    |> Repo.preload(:subjects)
+    |> with_subject_list()
 
     # |> Repo.preload(:user)
+  end
+
+  def with_subject_list(teacher) do
+    subjects =
+      teacher.subjects
+      |> Enum.map(&"#{&1.id}")
+
+      %Teacher{teacher | subject_list: subjects}
   end
 
   def get_teacher_with_user!(id) do
     Teacher
     |> Repo.get!(id)
     |> Repo.preload(:user)
+    |> Repo.preload(:subjects)
+    |> with_subject_list()
+  end
+
+  def get_teachers(ids) do
+    query = from t in Teacher, where: t.id in ^ids
+
+    teachers = Repo.all(query)
+    teachers
   end
 
   @doc """

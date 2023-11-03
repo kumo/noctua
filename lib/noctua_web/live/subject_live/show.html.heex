@@ -10,6 +10,7 @@
 
 <.list>
   <:item title="Name"><%= @subject.name %></:item>
+  <:item title="Teachers"><%= Enum.count(@subject.teachers) %></:item>
 </.list>
 
 <.back navigate={~p"/subjects"}>Back to subjects</.back>

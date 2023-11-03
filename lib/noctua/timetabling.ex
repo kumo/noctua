@@ -247,7 +247,6 @@ defmodule Noctua.Timetabling do
     # Repo.all(Classroom), preload: [:student, :teacher])
   end
 
-  # list the ordered classrooms for the teacher id
   def list_ordered_classrooms_for_teacher_id(teacher_id) do
     query =
       from c in Classroom,
@@ -461,7 +460,27 @@ defmodule Noctua.Timetabling do
       ** (Ecto.NoResultsError)
 
   """
-  def get_subject!(id), do: Repo.get!(Subject, id)
+  def get_subject!(id) do
+    Subject
+    |> Repo.get!(id)
+    |> Repo.preload(:teachers)
+    |> with_teacher_list()
+  end
+
+  def with_teacher_list(subject) do
+    teachers =
+      subject.teachers
+      |> Enum.map(&"#{&1.id}")
+
+    %Subject{subject | teacher_list: teachers}
+  end
+
+  def get_subjects(ids) do
+    query = from s in Subject, where: s.id in ^ids
+
+    subjects = Repo.all(query)
+    subjects
+  end
 
   @doc """
   Creates a subject.

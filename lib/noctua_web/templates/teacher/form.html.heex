@@ -52,6 +52,8 @@
           </.inputs_for>
         </fieldset>
 
+        <.checkgroup field={f[:subject_list]} label="Materie" options={Noctua.Timetabling.list_subjects() |> Enum.map(&{"#{&1.name}", "#{&1.id}"})} />
+
       </div>
 
     </div>
