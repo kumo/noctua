@@ -28,6 +28,20 @@ defmodule Noctua.Timetabling do
     # Repo.all(Lesson), preload: [:student, :teacher])
   end
 
+  def list_ordered_lessons_for_teacher_id(teacher_id) do
+    query =
+      from l in Lesson,
+        order_by: [desc: l.started_at],
+        join: s in assoc(l, :student),
+        join: t in assoc(l, :teacher),
+        where: is_nil(s.archived) or s.archived != true,
+        where: is_nil(t.archived) or t.archived != true,
+        where: l.teacher_id == ^teacher_id,
+        preload: [:student, :teacher]
+
+    Repo.all(query)
+  end
+
   def list_ordered_lessons do
     query =
       from l in Lesson,
