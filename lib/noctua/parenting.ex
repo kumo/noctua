@@ -27,6 +27,7 @@ defmodule Noctua.Parenting do
     |> Parent.active()
     |> Repo.all()
     |> Repo.preload(:students)
+    |> Repo.preload(:user)
   end
 
   @doc """
