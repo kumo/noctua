@@ -29,6 +29,8 @@ defmodule Noctua.Timetabling do
   end
 
   def list_ordered_lessons_for_teacher_id(teacher_id) do
+    {:ok, datetime} = NaiveDateTime.new(~D[2023-10-01], ~T[00:00:00])
+
     query =
       from l in Lesson,
         order_by: [desc: l.started_at],
@@ -37,12 +39,15 @@ defmodule Noctua.Timetabling do
         where: is_nil(s.archived) or s.archived != true,
         where: is_nil(t.archived) or t.archived != true,
         where: l.teacher_id == ^teacher_id,
+        where: l.started_at > ^datetime,
         preload: [:student, :teacher]
 
     Repo.all(query)
   end
 
   def list_ordered_lessons do
+    {:ok, datetime} = NaiveDateTime.new(~D[2023-10-01], ~T[00:00:00])
+
     query =
       from l in Lesson,
         order_by: [desc: l.started_at],
@@ -50,6 +55,7 @@ defmodule Noctua.Timetabling do
         join: t in assoc(l, :teacher),
         where: is_nil(s.archived) or s.archived != true,
         where: is_nil(t.archived) or t.archived != true,
+        where: l.started_at > ^datetime,
         preload: [:student, :teacher]
 
     Repo.all(query)
