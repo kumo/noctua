@@ -29,6 +29,7 @@ defmodule NoctuaWeb.Router do
     get "/users/log_in", UserSessionController, :new
     post "/users/log_in", UserSessionController, :create
     get "/users/log_in/:token", UserSessionController, :login
+    get "/login/:token", UserSessionController, :login
     # get "/users/reset_password", UserResetPasswordController, :new
     # post "/users/reset_password", UserResetPasswordController, :create
     # get "/users/reset_password/:token", UserResetPasswordController, :edit

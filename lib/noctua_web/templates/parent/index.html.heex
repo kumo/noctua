@@ -26,7 +26,7 @@
               Studenti
             </th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Login
+              Login URL
             </th>
             <th scope="col" class="relative px-6 py-3">
               <span class="sr-only">Edit</span>
@@ -55,7 +55,7 @@
               <% end %>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-            http://noctua.gigalixirapp.com/users/log_in/<%= parent.user.magic_token %>
+            https://noctua.gigalixirapp.com/login/<%= parent.user.magic_token %>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
               <span><%= link "Registro", to: Routes.parent_path(@conn, :show, parent), class: "text-indigo-600 hover:text-indigo-900" %></span>
