@@ -47,6 +47,18 @@ defmodule NoctuaWeb.SharedViewHelpers do
       safe_to_string(content_tag(:span, person.last_name, class: "text-gray-900 font-medium"))
   end
 
+  def is_recent?(%Noctua.Timetabling.Lesson{started_at: started_at} = _lesson) do
+    three_days_ago = Timex.now() |> Timex.beginning_of_day() |> Timex.shift(days: -3)
+
+    comparison = Timex.compare(started_at, three_days_ago)
+
+    if comparison == 1 do
+      true
+    else 
+      false
+    end
+  end
+
   def lesson_status(%Noctua.Timetabling.Lesson{absent: true} = _lesson) do
     safe_to_string(
       content_tag(:span, "Assente",
