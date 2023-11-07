@@ -68,4 +68,14 @@ defmodule NoctuaWeb.ClassroomController do
     |> put_flash(:info, "Classroom deleted successfully.")
     |> redirect(to: Routes.classroom_path(conn, :index))
   end
+
+  def toggle(conn, %{"id" => id, "absence_id" => absence_id}) do
+    classroom = Timetabling.get_classroom!(id)
+    absence = Timetabling.get_absence!(absence_id)
+    Timetabling.toggle_absence(absence)
+
+    conn
+    |> put_flash(:info, "Stato aggiornato.")
+    |> redirect(to: Routes.classroom_path(conn, :show, classroom))
+  end
 end

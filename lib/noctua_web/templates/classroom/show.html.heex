@@ -1,31 +1,43 @@
-<h1>Show classroom</h1>
+<.header>
+  Assenze
+  <:subtitle>This is a classroom record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/classrooms/#{@classroom}/edit"} phx-click={JS.push_focus()}>
+      <.button>Modifica assenze</.button>
+    </.link>
+  </:actions>
+</.header>
 
-<ul>
+<.list>
+  <:item title="Materia"><%= @classroom.subject.name %></:item>
+  <:item title="Docente"> <%= raw full_name_emphasised(@classroom.teacher) %> </:item>
+  <:item title="Quando"><%= Timex.format!(@classroom.started_at, "{D}/{M}/{YYYY}") %></:item>
+  <:item title="Studenti"><%= Enum.count(@classroom.students) %></:item>
+</.list>
 
-<%= for student <- @classroom.students  do %>
-  <li>
-    <strong>Student:</strong>
-    <%= student.last_name %>
-    <%= student.first_name %>
-  </li>
-  <% end %>
+      <.table id="absences" rows={@classroom.absences}>
+        <:col :let={absence} label="Nome"><%= raw full_name_emphasised(absence.student) %></:col>
+        <:col :let={absence} label="Stato"><%= if absence.late do %>
+        <%= 
+      content_tag(:span, "Ritardo",
+        class:
+          "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"
+      ) %>
+      <% else %>
+      <%= content_tag(:span, "Assente",
+        class:
+          "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"
+      ) %>
+      <% end %>
+        </:col>
+        <:col :let={absence} label="">
+        <%= if absence.late do %>
+        <span><%= link "Segna come assente", to: Routes.classroom_path(@conn, :toggle, @classroom, absence), class: "text-indigo-600 hover:text-indigo-900 text-sm font-medium"  %></span>
+        <% else %>
+        <span><%= link "Segna come ritardo", to: Routes.classroom_path(@conn, :toggle, @classroom, absence), class: "text-indigo-600 hover:text-indigo-900 text-sm font-medium"  %></span>
+        <% end %>
+        </:col>
+      </.table>
 
-  <li>
-    <strong>Teacher:</strong>
-    <%= @classroom.teacher.first_name %>
-  </li>
 
-  <li>
-    <strong>Iniziata:</strong>
-    <%= @classroom.started_at %>
-  </li>
-
-  <li>
-    <strong>Finita:</strong>
-    <%= @classroom.ended_at %>
-  </li>
-
-</ul>
-
-<span><%= link "Modifica", to: Routes.classroom_path(@conn, :edit, @classroom) %></span> |
-<span><%= link "Back", to: Routes.classroom_path(@conn, :index) %></span>
+<.back navigate={~p"/classrooms"}>Back</.back>

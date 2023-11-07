@@ -23,6 +23,8 @@ defmodule Noctua.Timetabling.Classroom do
       on_delete: :delete_all,
       on_replace: :delete
 
+    has_many :absences, Noctua.Timetabling.Absence
+
     # has_many :preferences, Preference, on_replace: :delete
     # has_many :cats, :through => :preferences
 

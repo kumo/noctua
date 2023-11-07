@@ -8,6 +8,7 @@ defmodule Noctua.Timetabling do
 
   alias Noctua.Timetabling.Lesson
   alias Noctua.Timetabling.Classroom
+  alias Noctua.Timetabling.Absence
 
   @doc """
   Returns the list of lessons.
@@ -370,6 +371,8 @@ defmodule Noctua.Timetabling do
     |> Repo.get!(id)
     |> Repo.preload(:students)
     |> Repo.preload(:teacher)
+    |> Repo.preload(:subject)
+    |> Repo.preload(absences: [:student])
   end
 
   @doc """
@@ -551,5 +554,16 @@ defmodule Noctua.Timetabling do
   """
   def change_subject(%Subject{} = subject, attrs \\ %{}) do
     Subject.changeset(subject, attrs)
+  end
+
+  def toggle_absence(%Absence{late: late} = absence) do
+    absence
+    |> Absence.changeset(%{late: !late})
+    |> Repo.update()
+  end
+
+  def get_absence!(id) do
+    Absence
+    |> Repo.get!(id)
   end
 end

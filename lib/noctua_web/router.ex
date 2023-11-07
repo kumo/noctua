@@ -64,6 +64,7 @@ defmodule NoctuaWeb.Router do
     get "/students/:id/archive", StudentController, :archive
     resources "/students", StudentController
     resources "/lessons", LessonController
+    get "/classrooms/:id/toggle/:absence_id", ClassroomController, :toggle
     resources "/classrooms", ClassroomController
     get "/parents/:id/archive", ParentController, :archive
     resources "/parents", ParentController

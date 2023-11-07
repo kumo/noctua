@@ -16,7 +16,7 @@ defmodule Noctua.Timetabling.Absence do
   @doc false
   def changeset(absence, attrs) do
     absence
-    |> cast(attrs, [:student_id, :classroom_id])
+    |> cast(attrs, [:student_id, :classroom_id, :late])
     |> validate_required([:student_id, :classroom_id])
   end
 end
