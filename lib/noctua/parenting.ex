@@ -48,6 +48,7 @@ defmodule Noctua.Parenting do
     Parent
     |> Repo.get!(id)
     |> Repo.preload(:students)
+    |> Repo.preload(:user)
     |> with_student_list()
   end
 
