@@ -38,5 +38,4 @@ defmodule NoctuaWeb.UserView do
   def show_role(%Noctua.Accounts.User{role: :Parent} = user) do
     "👪" <> " - " <> full_name(user.parent)
   end
-
 end

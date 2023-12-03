@@ -29,7 +29,8 @@ defmodule NoctuaWeb.ParentController do
   def show(conn, %{"id" => id}) do
     parent = Parenting.get_parent!(id)
     # lessons = Noctua.Timetabling.list_this_month_lessons(parent)
-    students = [] # Noctua.Parenting.list_active_students_for_parent(parent)
+    # students = Noctua.Parenting.list_active_students_for_parent(parent)
+    students = []
     lessons = []
     render(conn, "show.html", parent: parent, students: students, lessons: lessons)
   end

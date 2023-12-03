@@ -12,11 +12,11 @@ defmodule NoctuaWeb.DashboardController do
     if conn.assigns.current_user.role == :Parent do
       parents(conn, params)
     else
-    # I think it makes sense for the Timetabling context to list today's lessons
-    lessons = Timetabling.list_today_lessons()
-    students = Reporting.list_students_today_stats()
-    teachers = Reporting.list_teachers_today_stats()
-    render(conn, "index.html", lessons: lessons, students: students, teachers: teachers)
+      # I think it makes sense for the Timetabling context to list today's lessons
+      lessons = Timetabling.list_today_lessons()
+      students = Reporting.list_students_today_stats()
+      teachers = Reporting.list_teachers_today_stats()
+      render(conn, "index.html", lessons: lessons, students: students, teachers: teachers)
     end
   end
 
@@ -27,7 +27,7 @@ defmodule NoctuaWeb.DashboardController do
     # get first student of parent permissions
     # students = Noctua.Parenting.get_students_for_parent(parent)
 
-    Logger.error parent.students
+    Logger.error(parent.students)
     student = parent.students |> Enum.at(0, :no_student)
 
     # if there are no students, set classrooms as empty array

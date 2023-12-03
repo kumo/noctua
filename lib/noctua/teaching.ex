@@ -56,7 +56,7 @@ defmodule Noctua.Teaching do
       teacher.subjects
       |> Enum.map(&"#{&1.id}")
 
-      %Teacher{teacher | subject_list: subjects}
+    %Teacher{teacher | subject_list: subjects}
   end
 
   def get_teacher_with_user!(id) do

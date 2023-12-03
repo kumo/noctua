@@ -54,7 +54,7 @@ defmodule NoctuaWeb.SharedViewHelpers do
 
     if comparison == 1 do
       true
-    else 
+    else
       false
     end
   end

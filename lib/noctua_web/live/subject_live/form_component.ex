@@ -21,7 +21,14 @@ defmodule NoctuaWeb.SubjectLive.FormComponent do
       >
         <.input field={@form[:name]} type="text" label="Name" />
 
-        <.checkgroup field={@form[:teacher_list]} label="Docenti" options={Noctua.Teaching.list_alphabetical_teachers() |> Enum.map(&{"#{&1.last_name} #{&1.first_name}", "#{&1.id}"})} />
+        <.checkgroup
+          field={@form[:teacher_list]}
+          label="Docenti"
+          options={
+            Noctua.Teaching.list_alphabetical_teachers()
+            |> Enum.map(&{"#{&1.last_name} #{&1.first_name}", "#{&1.id}"})
+          }
+        />
 
         <:actions>
           <.button phx-disable-with="Saving...">Save Subject</.button>
