@@ -2,8 +2,6 @@ defmodule NoctuaWeb.DashboardController do
   use NoctuaWeb, :controller
   alias Noctua.Timetabling
   alias Noctua.Reporting
-  alias Noctua.Enroling
-  alias Noctua.Enroling.Student
 
   require Logger
 
