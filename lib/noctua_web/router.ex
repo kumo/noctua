@@ -55,19 +55,17 @@ defmodule NoctuaWeb.Router do
   end
 
   scope "/", NoctuaWeb do
-    pipe_through [:browser, :require_authenticated_user]
+    pipe_through [:browser, :require_authenticated_user, :require_staff_level]
 
-    get "/", DashboardController, :index
-    # get "/parents", DashboardController, :parents
     get "/teachers/:id/archive", TeacherController, :archive
     resources "/teachers", TeacherController
+
     get "/students/:id/archive", StudentController, :archive
     resources "/students", StudentController
-    resources "/lessons", LessonController
-    get "/classrooms/:id/toggle/:absence_id", ClassroomController, :toggle
-    resources "/classrooms", ClassroomController
+
     get "/parents/:id/archive", ParentController, :archive
     resources "/parents", ParentController
+
     resources "/users", UserController
 
     live "/subjects", SubjectLive.Index, :index
@@ -75,6 +73,20 @@ defmodule NoctuaWeb.Router do
     live "/subjects/:id/edit", SubjectLive.Index, :edit
     live "/subjects/:id", SubjectLive.Show, :show
     live "/subjects/:id/show/edit", SubjectLive.Show, :edit
+  end
+
+  scope "/", NoctuaWeb do
+    pipe_through [:browser, :require_authenticated_user, :require_teacher_level]
+
+    resources "/lessons", LessonController
+    get "/classrooms/:id/toggle/:absence_id", ClassroomController, :toggle
+    resources "/classrooms", ClassroomController
+  end
+
+  scope "/", NoctuaWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    get "/", DashboardController, :index
   end
 
   # Other scopes may use custom stacks.

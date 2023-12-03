@@ -145,6 +145,40 @@ defmodule NoctuaWeb.UserAuth do
     end
   end
 
+  @doc """
+  Used for routes that require the user to be secretary or admin.
+  """
+  def require_staff_level(conn, _opts) do
+    allowed_roles = [:Secretary, :Admin]
+
+    if conn.assigns[:current_user].role in allowed_roles do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You must have the right permissions.")
+      |> maybe_store_return_to()
+      |> redirect(to: Routes.dashboard_path(conn, :index))
+      |> halt()
+    end
+  end
+
+  @doc """
+  Used for routes that require the user to be teacher or higher.
+  """
+  def require_teacher_level(conn, _opts) do
+    allowed_roles = [:Teacher, :Secretary, :Admin]
+
+    if conn.assigns[:current_user].role in allowed_roles do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You must have the right permissions.")
+      |> maybe_store_return_to()
+      |> redirect(to: Routes.dashboard_path(conn, :index))
+      |> halt()
+    end
+  end
+
   defp maybe_store_return_to(%{method: "GET"} = conn) do
     put_session(conn, :user_return_to, current_path(conn))
   end
