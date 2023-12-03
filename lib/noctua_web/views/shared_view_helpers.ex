@@ -62,8 +62,7 @@ defmodule NoctuaWeb.SharedViewHelpers do
   def lesson_status(%Noctua.Timetabling.Lesson{absent: true} = _lesson) do
     safe_to_string(
       content_tag(:span, "Assente",
-        class:
-          "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"
+        class: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"
       )
     )
   end
@@ -72,8 +71,7 @@ defmodule NoctuaWeb.SharedViewHelpers do
       when minutes > 0 and is_number(minutes) do
     safe_to_string(
       content_tag(:span, "Ritardo",
-        class:
-          "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"
+        class: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"
       )
     )
   end
@@ -82,8 +80,7 @@ defmodule NoctuaWeb.SharedViewHelpers do
       when minutes > 0 and is_number(minutes) do
     safe_to_string(
       content_tag(:span, "Anticipato",
-        class:
-          "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"
+        class: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"
       )
     )
   end

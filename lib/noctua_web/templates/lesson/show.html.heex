@@ -1,7 +1,6 @@
 <h1>Show Lesson</h1>
 
 <ul>
-
   <li>
     <strong>Student:</strong>
     <%= @lesson.student.first_name %>
@@ -41,8 +40,7 @@
     <strong>Note:</strong>
     <%= @lesson.note %>
   </li>
-
 </ul>
 
-<span><%= link "Modifica", to: Routes.lesson_path(@conn, :edit, @lesson) %></span> |
-<span><%= link "Back", to: Routes.lesson_path(@conn, :index) %></span>
+<span><%= link("Modifica", to: Routes.lesson_path(@conn, :edit, @lesson)) %></span>
+| <span><%= link "Back", to: Routes.lesson_path(@conn, :index) %></span>

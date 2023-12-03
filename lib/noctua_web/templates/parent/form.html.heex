@@ -9,9 +9,7 @@
 
       <div class="space-y-6 sm:space-y-5">
         <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-          <%= label(f, :first_name, "Nome",
-            class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-          ) %>
+          <%= label(f, :first_name, "Nome", class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2") %>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
             <%= text_input(f, :first_name,
               class:
@@ -23,9 +21,7 @@
         </div>
 
         <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-          <%= label(f, :last_name, "Cognome",
-            class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-          ) %>
+          <%= label(f, :last_name, "Cognome", class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2") %>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
             <%= text_input(f, :last_name,
               class:
@@ -38,9 +34,7 @@
 
         <%= inputs_for f, :user, fn fp -> %>
           <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-            <%= label(fp, :email,
-              class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-            ) %>
+            <%= label(fp, :email, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2") %>
             <div class="mt-1 sm:mt-0 sm:col-span-2">
               <%= email_input(fp, :email,
                 class:
@@ -52,9 +46,7 @@
           </div>
 
           <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-            <%= label(fp, :password,
-              class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-            ) %>
+            <%= label(fp, :password, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2") %>
             <div class="mt-1 sm:mt-0 sm:col-span-2">
               <%= password_input(fp, :password,
                 class:
@@ -66,9 +58,7 @@
           </div>
 
           <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-            <%= label(fp, :magic_token,
-              class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-            ) %>
+            <%= label(fp, :magic_token, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2") %>
             <div class="mt-1 sm:mt-0 sm:col-span-2">
               <%= if assigns[:parent] != nil do %>
                 <%= text_input(fp, :magic_token,

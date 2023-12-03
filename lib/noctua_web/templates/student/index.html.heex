@@ -4,14 +4,14 @@
     Studenti
   </h3>
   <div class="mt-3 sm:mt-0 sm:ml-4">
-    <%= link "Nuovo Studente", to: Routes.student_path(@conn, :new), class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-
+    <%= link("Nuovo Studente",
+      to: Routes.student_path(@conn, :new),
+      class:
+        "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    ) %>
   </div>
 </div>
-
-
 <!-- This example requires Tailwind CSS v2.0+ -->
-
 <div class="flex flex-col mt-8">
   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -39,36 +39,37 @@
               </th>
             </tr>
           </thead>
-           <tbody class="bg-white divide-y divide-gray-200">
-
-<%= for student <- @students do %>
-
-            <tr class="bg-white">
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <%= link to: Routes.student_path(@conn, :edit, student), class: "text-indigo-600 hover:text-indigo-900" do %>
-                <span class="truncate"><%= student.first_name %></span>
-                <span class="font-medium"><%= student.last_name %></span>
-                <% end %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <%= student.today_count %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <%= student.this_week_count %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <%= student.this_month_count %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <%= student.absence_count %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <span><%= link "Registro", to: Routes.student_path(@conn, :show, student), class: "text-indigo-600 hover:text-indigo-900" %></span>
-              </td>
-            </tr>
-
-<% end %>
-
+          <tbody class="bg-white divide-y divide-gray-200">
+            <%= for student <- @students do %>
+              <tr class="bg-white">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <%= link to: Routes.student_path(@conn, :edit, student), class: "text-indigo-600 hover:text-indigo-900" do %>
+                    <span class="truncate"><%= student.first_name %></span>
+                    <span class="font-medium"><%= student.last_name %></span>
+                  <% end %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <%= student.today_count %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <%= student.this_week_count %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <%= student.this_month_count %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <%= student.absence_count %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <span>
+                    <%= link("Registro",
+                      to: Routes.student_path(@conn, :show, student),
+                      class: "text-indigo-600 hover:text-indigo-900"
+                    ) %>
+                  </span>
+                </td>
+              </tr>
+            <% end %>
             <!-- More people... -->
           </tbody>
         </table>

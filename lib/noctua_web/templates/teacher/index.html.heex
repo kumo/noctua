@@ -4,14 +4,14 @@
     Docenti
   </h3>
   <div class="mt-3 sm:mt-0 sm:ml-4">
-    <%= link "Nuovo Docente", to: Routes.teacher_path(@conn, :new), class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-       
+    <%= link("Nuovo Docente",
+      to: Routes.teacher_path(@conn, :new),
+      class:
+        "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    ) %>
   </div>
 </div>
-
-
 <!-- This example requires Tailwind CSS v2.0+ -->
-
 <div class="flex flex-col mt-8">
   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -39,38 +39,40 @@
               </th>
             </tr>
           </thead>
-           <tbody class="bg-white divide-y divide-gray-200">
-
-<%= for teacher <- @teachers do %>
-
-            <tr class="bg-white">
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <%= link to: Routes.teacher_path(@conn, :edit, teacher), class: "text-indigo-600 hover:text-indigo-900" do %>
-                <span class="truncate"><%= teacher.first_name %></span> 
-                <span class="font-medium"><%= teacher.last_name %></span>
-                <% end %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <%= teacher.today_count %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <%= teacher.this_week_count %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <%= teacher.this_month_count %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <%= teacher.last_month_count %>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"> <%= teacher.absence_count %> </span>
-                
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <span><%= link "Registro", to: Routes.teacher_path(@conn, :show, teacher), class: "text-indigo-600 hover:text-indigo-900" %></span>
-              </td>
-            </tr>
-
-<% end %>            
-
+          <tbody class="bg-white divide-y divide-gray-200">
+            <%= for teacher <- @teachers do %>
+              <tr class="bg-white">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <%= link to: Routes.teacher_path(@conn, :edit, teacher), class: "text-indigo-600 hover:text-indigo-900" do %>
+                    <span class="truncate"><%= teacher.first_name %></span>
+                    <span class="font-medium"><%= teacher.last_name %></span>
+                  <% end %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <%= teacher.today_count %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <%= teacher.this_week_count %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <%= teacher.this_month_count %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <%= teacher.last_month_count %>
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                    <%= teacher.absence_count %>
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <span>
+                    <%= link("Registro",
+                      to: Routes.teacher_path(@conn, :show, teacher),
+                      class: "text-indigo-600 hover:text-indigo-900"
+                    ) %>
+                  </span>
+                </td>
+              </tr>
+            <% end %>
             <!-- More people... -->
           </tbody>
         </table>

@@ -12,13 +12,7 @@ defmodule NoctuaWeb.SubjectLive.FormComponent do
         <:subtitle>Use this form to manage subject records in your database.</:subtitle>
       </.header>
 
-      <.simple_form
-        for={@form}
-        id="subject-form"
-        phx-target={@myself}
-        phx-change="validate"
-        phx-submit="save"
-      >
+      <.simple_form for={@form} id="subject-form" phx-target={@myself} phx-change="validate" phx-submit="save">
         <.input field={@form[:name]} type="text" label="Name" />
 
         <.checkgroup

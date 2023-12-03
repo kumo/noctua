@@ -20,10 +20,7 @@
     <.link patch={~p"/subjects/#{subject}/edit"}>Edit</.link>
   </:action>
   <:action :let={{id, subject}}>
-    <.link
-      phx-click={JS.push("delete", value: %{id: subject.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
-    >
+    <.link phx-click={JS.push("delete", value: %{id: subject.id}) |> hide("##{id}")} data-confirm="Are you sure?">
       Delete
     </.link>
   </:action>
