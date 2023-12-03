@@ -28,14 +28,15 @@ defmodule NoctuaWeb.DashboardController do
     # students = Noctua.Parenting.get_students_for_parent(parent)
 
     Logger.error parent.students
-    student = parent.students |> Enum.at(0)
+    student = parent.students |> Enum.at(0, :no_student)
 
-    # student = Enroling.get_student!(1)
-    # lessons = Noctua.Timetabling.list_this_month_absent_lessons(student)
-    classrooms = Noctua.Timetabling.list_this_month_classrooms(student)
-    # lessons = Timetabling.list_today_lessons()
-    # students = Reporting.list_students_today_stats()
-    # teachers = Reporting.list_teachers_today_stats()
+    # if there are no students, set classrooms as empty array
+    classrooms =
+      case student do
+        :no_student -> []
+        _ -> Noctua.Timetabling.list_this_month_classrooms(student)
+      end
+
     render(conn, "parents.html", classrooms: classrooms, student: student)
   end
 end

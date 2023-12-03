@@ -45,7 +45,10 @@
               <% end %>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-            <!-- show students separated by commas -->
+
+            <%= if length(parent.students) == 0 do %>
+              <span class="text-red-600">Nessuno</span>
+            <% else %>
             <%= for student <- parent.students do %>
               <span class="truncate"><%= student.first_name %></span> 
               <span class="font-medium"><%= student.last_name %></span>
@@ -53,6 +56,7 @@
                 ,
               <% end %>
               <% end %>
+              <% end  %>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
             <pre>https://noctua.gigalixirapp.com/login/<%= parent.user.magic_token %></pre>
