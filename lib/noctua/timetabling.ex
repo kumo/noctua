@@ -263,6 +263,7 @@ defmodule Noctua.Timetabling do
         where: is_nil(s.archived) or s.archived != true,
         where: is_nil(t.archived) or t.archived != true,
         where: c.teacher_id == ^teacher_id,
+        distinct: c.id,
         preload: [:students, :teacher, :subject]
 
     Repo.all(query)
