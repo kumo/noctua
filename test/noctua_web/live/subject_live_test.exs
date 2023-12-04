@@ -8,6 +8,8 @@ defmodule NoctuaWeb.SubjectLiveTest do
   @update_attrs %{name: "some updated name"}
   @invalid_attrs %{name: nil}
 
+  setup :register_and_log_in_user
+
   defp create_subject(_) do
     subject = subject_fixture()
     %{subject: subject}
