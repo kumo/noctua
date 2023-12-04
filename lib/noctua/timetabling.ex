@@ -153,7 +153,7 @@ defmodule Noctua.Timetabling do
     Lesson
     |> Repo.get!(id)
     |> Repo.preload(:student)
-    |> Repo.preload(:teacher)
+    |> Repo.preload(teacher: [:subjects])
   end
 
   @doc """
@@ -453,7 +453,9 @@ defmodule Noctua.Timetabling do
 
   """
   def list_subjects do
-    Repo.all(Subject)
+    Subject
+    |> preload([:teachers])
+    |> Repo.all()
   end
 
   @doc """

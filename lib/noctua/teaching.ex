@@ -18,7 +18,9 @@ defmodule Noctua.Teaching do
 
   """
   def list_teachers do
-    Repo.all(Teacher)
+    Teacher
+    |> preload([:subjects])
+    |> Repo.all()
   end
 
   def list_alphabetical_teachers do
