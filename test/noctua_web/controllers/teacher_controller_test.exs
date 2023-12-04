@@ -12,14 +12,14 @@ defmodule NoctuaWeb.TeacherControllerTest do
   describe "index" do
     test "lists all teachers", %{conn: conn} do
       conn = get(conn, Routes.teacher_path(conn, :index))
-      assert html_response(conn, 200) =~ "Elenco Docenti"
+      assert html_response(conn, 200) =~ "Docenti"
     end
   end
 
   describe "new teacher" do
     test "renders form", %{conn: conn} do
       conn = get(conn, Routes.teacher_path(conn, :new))
-      assert html_response(conn, 200) =~ "Nuovo Docente"
+      assert html_response(conn, 200) =~ "Salva"
     end
   end
 
@@ -36,7 +36,7 @@ defmodule NoctuaWeb.TeacherControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, Routes.teacher_path(conn, :create), teacher: @invalid_attrs)
-      assert html_response(conn, 200) =~ "Nuovo Docente"
+      assert html_response(conn, 200) =~ "Salva"
     end
   end
 

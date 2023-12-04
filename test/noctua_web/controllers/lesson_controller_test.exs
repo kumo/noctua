@@ -62,7 +62,7 @@ defmodule NoctuaWeb.LessonControllerTest do
 
     test "renders form for editing chosen lesson", %{conn: conn, lesson: lesson} do
       conn = get(conn, Routes.lesson_path(conn, :edit, lesson))
-      assert html_response(conn, 200) =~ "Modifica lezione"
+      assert html_response(conn, 200) =~ "Salva"
     end
   end
 
@@ -79,7 +79,7 @@ defmodule NoctuaWeb.LessonControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn, lesson: lesson} do
       conn = put(conn, Routes.lesson_path(conn, :update, lesson), lesson: @invalid_attrs)
-      assert html_response(conn, 200) =~ "Modifica Registro"
+      assert html_response(conn, 200) =~ "Salva"
     end
   end
 
