@@ -29,6 +29,15 @@ defmodule Noctua.Timetabling do
     # Repo.all(Lesson), preload: [:student, :teacher])
   end
 
+  @doc """
+  Returns the list of lessons for a teacher, ordered by starting time.
+
+  ## Examples
+
+      iex> list_ordered_lessons_for_teacher_id(1)
+      [%Lesson{}, ...]
+
+  """
   def list_ordered_lessons_for_teacher_id(teacher_id) do
     {:ok, datetime} = NaiveDateTime.new(~D[2023-10-01], ~T[00:00:00])
 
